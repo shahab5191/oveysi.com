@@ -1,0 +1,62 @@
+.window{
+  position: absolute;
+  background-color: var(--window-bg);
+  border-top-right-radius: var(--window-radius);
+  border-top-left-radius: var(--window-radius);
+  border: 1px solid var(--window-border-color);
+}
+
+.window.focused{
+  box-shadow: 0 0 var(--window-backdrop-radius) var(--window-backdrop);
+}
+
+.window.maximized{
+  border-radius: 2px;
+}
+
+.window.animateTransform{
+  transition: left 0.2s ease-out, top 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out
+}
+
+.edge{
+  position: absolute;
+  user-select: none;
+  opacity: 1;
+  z-index: 999;
+}
+.edge.leftEdgeIndicator{
+  left: calc(var(--windowEdge-width)/-2);
+  cursor: w-resize;
+}
+.edge.rightEdgeIndicator{
+  right: calc(var(--windowEdge-width)/-2);
+  cursor: e-resize;
+}
+.edge.topEdgeIndicator{
+  top: calc(var(--windowEdge-width)/-2);
+  cursor: n-resize;
+}
+.edge.bottomEdgeIndicator{
+  bottom: calc(var(--windowEdge-width)/-2);
+  cursor: s-resize;
+}
+.edge.topRightEdgeIndicator{
+  top: calc(var(--windowEdge-width)*-1);
+  right: calc(var(--windowEdge-width)*-1);
+  cursor: ne-resize;
+}
+.edge.topLeftEdgeIndicator{
+  top: calc(var(--windowEdge-width)*-1);
+  left: calc(var(--windowEdge-width)*-1);
+  cursor: nw-resize;
+}
+.edge.bottomRightEdgeIndicator{
+  bottom: calc(var(--windowEdge-width)*-1);;
+  right: calc(var(--windowEdge-width)*-1);;
+  cursor: se-resize;
+}
+.edge.bottomLeftEdgeIndicator{
+  bottom: calc(var(--windowEdge-width)*-1);;
+  left: calc(var(--windowEdge-width)*-1);;
+  cursor: sw-resize;
+}

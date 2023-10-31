@@ -1,0 +1,16 @@
+@import url("../../../global.module.css");
+.topBar{
+  display: flex;
+  height: var(--topBar-height);
+  width: 100%;
+  background-color: var(--topBar-bg);
+  color: var(--topBar-fg);
+  align-items: center;
+  justify-content: space-around;
+  z-index: 999;
+}
+.date{
+  margin: 0;
+  font-weight: var(--topBar-date-font-weight);
+  font-size: var(--topBar-date-font-size)
+}

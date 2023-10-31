@@ -1,0 +1,40 @@
+:root{
+  --font-family: 'Cantarell';
+
+  --headerBar-bg: #303030;
+  --headerBar-bg-unfocused: #242424;
+  --headerBar-fg: #ffffff;
+  --headerBar-height: 30px;
+  --headerBar-title-color: #ffffff;
+  --headerBar-padding: 5px;
+  --headerBar-border-color: rgba(0, 0, 0, 0.36);
+  --headerBar-font-size: 10pt;
+
+  --headerBar-button: #3e3e3e;
+  --headerBar-button-unfocused: #303030;
+  --headerBar-button-hover: #505050;
+  --headerBar-button-hover-unfocused: #3e3e3e;
+  --headerBar-button-size: 24px;
+  --headerBar-button-gap: 5px;
+
+  --windowEdge-width: 10px;
+  --window-radius: 10px;
+  --window-bg: #242424;
+  --window-fg: #ffffff;
+  --window-backdrop: #191919;
+  --window-backdrop-radius: 10px;
+  --window-border-color: #303030;
+
+  --view-bg: #1e1e1e;
+
+  --topBar-bg: #1e1e1e;
+  --topBar-height: 30px;
+  --topBar-fg: #ffffff;
+  --topBar-date-font-size: 11pt;
+  --topBar-date-font-weight: bold;
+
+}
+body{
+  font-family: var(--font-family);
+  margin: 0;
+}

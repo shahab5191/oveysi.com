@@ -1,0 +1,61 @@
+@import url('../../global.module.css');
+.topBar{
+  position: relative;
+  background-color: var(--headerBar-bg-unfocused);
+  width: calc(100% - var(--headerBar-padding) * 2);
+  height: var(--headerBar-height);
+  padding: var(--headerBar-padding);
+  border-bottom: 1px solid var(--headerBar-border-color);
+  justify-content: right;
+  align-content: center;
+  border-top-right-radius: var(--window-radius);
+  border-top-left-radius: var(--window-radius);
+  display: flex;
+}
+.topBar.focused{
+  background-color: var(--headerBar-bg);
+}
+
+.buttonsContainer{
+  display: flex;
+  align-items: center;
+  gap: var(--headerBar-button-gap);
+}
+
+h2.header{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  user-select: none;
+  width: 100%;
+  text-align: center;
+  color: var(--headerBar-fg);
+  font-size: var(--headerBar-font-size)
+}
+
+.button{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color: var(--headerBar-button-unfocused);
+  border: none;
+  color: var(--headerBar-fg);
+  width: var(--headerBar-button-size);
+  height: var(--headerBar-button-size);
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
+}
+.button.focused{
+  background-color: var(--headerBar-button);
+}
+.button.focused:hover{
+  background-color: var(--headerBar-button-hover);
+}
+.button:hover{
+  background-color: var(--headerBar-button-hover-unfocused);
+}
+
