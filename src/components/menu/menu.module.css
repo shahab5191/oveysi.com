@@ -1,0 +1,11 @@
+@import url("../../global.module.css");
+
+.menuContainer {
+  background-color: var(--menu-bg-color);
+  border-radius: var(--menu-border-radius);
+  color: var(--menu-fg-color);
+  border: 1px solid var(--menu-border-color);
+  padding: var(--menu-padding);
+  overflow: hidden;
+  user-select: none;
+}

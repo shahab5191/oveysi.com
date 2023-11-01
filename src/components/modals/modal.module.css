@@ -1,0 +1,29 @@
+@import url("../../global.module.css");
+
+.modalWrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: none;
+  z-index: 99999;
+  animation: show 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.modal {
+  position: absolute;
+  width: max-content;
+  height: max-content;
+  z-index: 1000000;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
