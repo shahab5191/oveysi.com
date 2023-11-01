@@ -1,4 +1,4 @@
-@import url('../../global.module.css');
+@import url('../../../global.module.css');
 .topBar{
   position: relative;
   background-color: var(--headerBar-bg-unfocused);

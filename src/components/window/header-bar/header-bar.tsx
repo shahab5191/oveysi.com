@@ -1,12 +1,11 @@
-import { objectTypes } from "../../types/enums"
+import { objectTypes } from "../../../types/enums"
 import { AiOutlineClose } from "react-icons/ai"
 import { MdMinimize } from "react-icons/md"
 import { VscChromeMaximize } from "react-icons/vsc"
 import styles from "./header-bar.module.css"
-import { useState } from "react"
-import { Modal } from "../modals/modal"
-import { Vec2 } from "../../types/types"
-import { MenuModal } from "../menu/menu"
+import { useCallback, useState } from "react"
+import { Vec2 } from "../../../types/types"
+import { HeaderBarMenu } from "./header-bar-menu"
 
 type Props = {
   title: string
@@ -24,6 +23,11 @@ export const HeaderBar = (props: Props) => {
       setShowMenu(true)
     }
   }
+
+  const itemClickHandler = useCallback((itemId: string) => {
+    console.log(itemId)
+    setShowMenu(false)
+  }, [])
 
   return (
     <>
@@ -62,18 +66,11 @@ export const HeaderBar = (props: Props) => {
         </div>
       </div>
       {showMenu ? (
-        <MenuModal
+        <HeaderBarMenu
+          onClose={() => setShowMenu(false)}
           clickPos={clickPos}
-          onClose={() => {
-            setShowMenu((current) => !current)
-          }}
-        >
-            <div style={{ width: "200px", height: "50px" }}>{props.title}</div>
-            <div style={{ width: "200px", height: "50px" }}></div>
-            <div style={{ width: "200px", height: "50px" }}></div>
-            <div style={{ width: "200px", height: "50px" }}></div>
-            <div style={{ width: "200px", height: "50px" }}></div>
-        </MenuModal>
+          onItemClicked={itemClickHandler}
+        />
       ) : null}
     </>
   )

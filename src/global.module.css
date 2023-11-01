@@ -35,10 +35,16 @@
 
   --menu-bg-color: #303030;
   --menu-fg-color: #ffffff;
-  --menu-border-color: rgba(0, 0, 0, 0.36);
+  --menu-border-color: rgba(100%, 100%, 100%, .05);
   --menu-shadow-color: #272727;
   --menu-border-radius: 15px;
   --menu-padding: 5px;
+  --menu-list-item-hover-bg: #404040;
+  --menu-list-item-border-radius: 10px;
+  --menu-list-item-min-width: 100px;
+  --menu-list-item-height: 30px;
+  --menu-list-item-padding: 5px 20px;
+  --menu-divider-margin: 5px 10px;
 }
 body {
   font-family: var(--font-family);

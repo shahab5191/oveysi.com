@@ -3,7 +3,7 @@ import { ResizeEdges } from "./resize-area"
 import { objectTypes } from "../../types/enums"
 import { Vec2 } from "../../types/types"
 import { ReactNode, useState } from "react"
-import { HeaderBar } from "./header-bar"
+import { HeaderBar } from "./header-bar/header-bar"
 import { useAppSelector } from "../../redux/hooks"
 import {
   closeWindow,
