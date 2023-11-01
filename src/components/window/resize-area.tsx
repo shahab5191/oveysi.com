@@ -1,6 +1,6 @@
 import styles from "./window.module.css";
 import settings from "../../settings/settings.json";
-import { objectTypes, windowEdges } from "../types/enums";
+import { objectTypes, windowEdges } from "../../types/enums";
 
 interface Props{}
 export const ResizeEdges = (props:Props) => {

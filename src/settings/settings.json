@@ -1,3 +1,6 @@
 {
-  "windowResizeOffset": 10
+  "windowResizeOffset": 10,
+  "wallpaper": "images/garud-linux-wallpaper.jpg",
+  "newWindowPos": "cascade",
+  "cascadeGap": 50
 }

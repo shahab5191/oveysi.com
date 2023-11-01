@@ -1,4 +1,4 @@
-import { windowEdges } from "../../types/enums";
+import { windowEdges } from "../../../types/enums";
 
 export const moveWindow = (
   windowObj: HTMLDivElement,

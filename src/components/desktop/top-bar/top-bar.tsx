@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./top-bar.module.css";
-import { getFormattedTime } from "../../utilities/formatted-time";
+import { getFormattedTime } from "../../../utilities/formatted-time";
 type Props = {};
 export const TopBar = (props: Props) => {
   const [time, setTime] = useState(getFormattedTime());

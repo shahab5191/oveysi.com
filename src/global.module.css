@@ -1,5 +1,5 @@
-:root{
-  --font-family: 'Cantarell';
+:root {
+  --font-family: "Cantarell";
 
   --headerBar-bg: #303030;
   --headerBar-bg-unfocused: #242424;
@@ -30,11 +30,17 @@
   --topBar-bg: #1e1e1e;
   --topBar-height: 30px;
   --topBar-fg: #ffffff;
-  --topBar-date-font-size: 11pt;
+  --topBar-date-font-size: 10pt;
   --topBar-date-font-weight: bold;
 
+  --menu-bg-color: #303030;
+  --menu-fg-color: #ffffff;
+  --menu-border-color: rgba(0, 0, 0, 0.36);
+  --menu-shadow-color: #272727;
+  --menu-border-radius: 15px;
+  --menu-padding: 5px;
 }
-body{
+body {
   font-family: var(--font-family);
   margin: 0;
 }
