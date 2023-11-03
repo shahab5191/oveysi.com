@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { Vec2, WindowProperties } from "../../types/types"
+import { Action, Vec2, WindowProperties } from "../../types/types"
 import { RootState } from "../store"
 import { ReactNode } from "react"
 import settings from "../../settings/settings.json"
-import { SettingsNewWindowPos } from "../../types/enums"
+import { ActionType, SettingsNewWindowPos } from "../../types/enums"
 
 interface State {
   windows: Record<string, WindowProperties>
@@ -11,6 +11,11 @@ interface State {
   lastColFirstItemPos: Vec2
   focusedWindow: string
   maxZindex: number
+  windowAction: {
+    canChangWindow: boolean
+    action: Action
+    windowId?: string
+  }
 }
 
 interface OpenWindow {
@@ -38,6 +43,11 @@ export const windowSlice = createSlice({
     lastColFirstItemPos: { x: 0, y: 0 },
     focusedWindow: "",
     maxZindex: 10,
+    windowAction: {
+      canChangWindow: false,
+      action: { type: ActionType.Move },
+      windowId: undefined,
+    },
   } as State,
   reducers: {
     openWindow: (state, action: PayloadAction<OpenWindow>) => {
@@ -99,6 +109,15 @@ export const windowSlice = createSlice({
       state.focusedWindow = action.payload.id
       state.windows[action.payload.id].zIndex = state.maxZindex++
     },
+    setCanChangeWindow: (state, action: PayloadAction<{ state: boolean }>) => {
+      state.windowAction.canChangWindow = action.payload.state
+    },
+    setWindowId: (state, action: PayloadAction<{ windowId?: string }>) => {
+      state.windowAction.windowId = action.payload.windowId
+    },
+    setWindowAction: (state, action: PayloadAction<Action>) => {
+      state.windowAction.action = action.payload
+    },
   },
 })
 
@@ -108,12 +127,20 @@ export const getWindows = (state: RootState) => {
 export const getFocusedWindow = (state: RootState) => {
   return state.windowReducer.focusedWindow
 }
-
+export const getWindowAction = (state: RootState) => {
+  return state.windowReducer.windowAction
+}
+export const isMaximized = (state:RootState,) =>{
+  return state.windowReducer.windows
+}
 export const {
   openWindow,
   closeWindow,
   changeWindow,
   toggleMaximize,
   setFocusedWindow,
+  setCanChangeWindow,
+  setWindowAction,
+  setWindowId
 } = windowSlice.actions
 export default windowSlice.reducer

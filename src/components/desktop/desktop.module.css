@@ -1,8 +1,27 @@
-.desktop{
+@import url("../../global.module.css");
+
+.desktop {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-color: var(--desktop-bg-color);
+}
+
+.workspace {
+  height: 100%;
+  width: 100%;
+  scale: 1;
+  box-shadow: 0 0 var(--workspace-overview-shadow-spread)
+    var(--workspace-overview-shadow-color);
+  transition: scale 0.2s ease-out, border-radius 0.2s ease-out, transform 0.2s ease-out;
+  overflow: hidden;
+}
+
+.workspace.isOverview {
+  transform: translateY(calc(var(--topBar-height) * -1));
+  scale: 0.75;
+  border-radius: 15px;
 }

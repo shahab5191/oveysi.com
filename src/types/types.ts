@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { ActionType, windowEdges } from "./enums"
 
 export interface Vec2 {
   x: number
@@ -12,4 +13,11 @@ export interface WindowProperties {
   children?: ReactNode
   maximized: boolean
   zIndex: number
+}
+
+export interface Action {
+  type: ActionType
+  option?: {
+    direction: windowEdges
+  }
 }

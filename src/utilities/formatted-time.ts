@@ -5,17 +5,14 @@ export const getFormattedTime = () => {
   const hours = date.getHours()
   const minutes = date.getMinutes()
   return `${MONTHES[month]} ${day} ${
-    hours.toString.length === 2 ? hours : "0" + hours
-  }:${minutes.toString.length === 2 ? minutes : "0" + minutes}`
+    hours.toString().length === 2 ? hours : "0" + hours
+  }:${minutes.toString().length === 2 ? minutes : "0" + minutes}`
 }
 
 const getDay = (date: string) => {
   const firstSlash = date.indexOf("/")
-  const lastSlash = date.indexOf("/")
-  let day = date.slice(firstSlash - 1, lastSlash)
-  if (day.length === 1) {
-    day = "0" + day
-  }
+  const lastSlash = date.lastIndexOf("/")
+  let day = date.slice(firstSlash + 1, lastSlash)
   return day
 }
 

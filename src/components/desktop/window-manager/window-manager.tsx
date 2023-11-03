@@ -7,73 +7,64 @@ import { Vec2 } from "../../../types/types"
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
 import {
   getFocusedWindow,
+  getWindowAction,
   getWindows,
+  setCanChangeWindow,
   setFocusedWindow,
-} from "../../../redux/slices/window-slice"
-import { changeWindow } from "../../../redux/slices/window-slice"
-import { Modal } from "../../modals/modal"
+  setWindowAction,
+  setWindowId,
+} from "../../../redux/slices/window-manager-slice"
+import { changeWindow } from "../../../redux/slices/window-manager-slice"
 
 interface Props {}
-interface Action {
-  type: ActionType
-  option?: {
-    direction: windowEdges
-  }
-}
-
 export const WindowManager = (props: Props) => {
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
-  const [mouseIsDown, setMouseIsDown] = useState(false)
-  const [windowObj, setWindowObj] = useState<HTMLDivElement | null>(null)
-  const [action, setAction] = useState<Action>({
-    type: ActionType.Resize,
-    option: { direction: windowEdges.TOP_LEFT },
-  })
+  const { canChangWindow, action, windowId } = useAppSelector(getWindowAction)
   const windowsList = useAppSelector(getWindows)
   const focusedWindow = useAppSelector(getFocusedWindow)
 
   const dispatch = useAppDispatch()
 
-  const changeDimension = (id: string, newPos?: Vec2, newSize?: Vec2) => {
-    dispatch(changeWindow({ id, pos: newPos, size: newSize }))
+  const changeDimension = (newPos?: Vec2, newSize?: Vec2) => {
+    dispatch(changeWindow({ id: windowId!, pos: newPos, size: newSize }))
+  }
+
+  const initializeWindowChange = (
+    e: React.MouseEvent,
+    window: HTMLDivElement,
+    action: { type: ActionType; option?: { direction: windowEdges } }
+  ) => {
+    const id = window.id
+    if (!id) return
+    dispatch(setWindowId({ windowId: id }))
+    dispatch(setCanChangeWindow({ state: true }))
+    dispatch(setWindowAction(action))
+    setLastMousePos({ x: e.pageX, y: e.pageY })
+    dispatch(setFocusedWindow({ id }))
   }
 
   const checkForWindowMove = (e: React.MouseEvent) => {
     if (e.target) {
       const target = e.target as HTMLDivElement
       if (target.getAttribute("object-type") === objectTypes.WINDOW) {
-        setMouseIsDown(true)
-        setWindowObj(target)
-        setAction({ type: ActionType.Move })
-        setLastMousePos({ x: e.pageX, y: e.pageY })
-        dispatch(setFocusedWindow({ id: target.getAttribute("window-id")! }))
+        initializeWindowChange(e, target, { type: ActionType.Move })
       } else if (
         target.getAttribute("object-type") === objectTypes.WINDOW_EDGE
       ) {
         const direction = target.getAttribute("window-edge") as windowEdges
         if (direction) {
           const window = target.parentElement as HTMLDivElement
-          setMouseIsDown(true)
-          setWindowObj(window)
-          setAction({
+          initializeWindowChange(e, window, {
             type: ActionType.Resize,
             option: { direction },
           })
-          setLastMousePos({ x: e.pageX, y: e.pageY })
-          dispatch(setFocusedWindow({ id: window.getAttribute("window-id")! }))
         }
       } else if (target.getAttribute("object-type")) {
         const window = target.closest(
           `[object-type=${objectTypes.WINDOW}]`
         ) as HTMLDivElement
         if (!window) return
-        setMouseIsDown(true)
-        setWindowObj(window)
-        setAction({
-          type: ActionType.Move,
-        })
-        setLastMousePos({ x: e.pageX, y: e.pageY })
-        dispatch(setFocusedWindow({ id: window.getAttribute("window-id")! }))
+        initializeWindowChange(e, window, { type: ActionType.Move })
       }
     }
   }
@@ -84,20 +75,21 @@ export const WindowManager = (props: Props) => {
     }
   }
   const mouseUpHandler = (e: React.MouseEvent) => {
-    setMouseIsDown(false)
-    setWindowObj(null)
+    dispatch(setCanChangeWindow({ state: false }))
+    dispatch(setWindowId({}))
   }
   const mouseMoveHandler = (e: React.MouseEvent) => {
-    if (!mouseIsDown) return
-    if (windowObj === null) return
+    if (!canChangWindow) return
+    if (windowId === undefined) return
+    const windowDom = document.getElementById(windowId) as HTMLDivElement
+    if (!windowDom) return
     switch (action.type) {
       case ActionType.Move: {
-        const movable = windowObj.getAttribute("is-movable")
+        const movable = windowDom.getAttribute("is-movable")
         if (movable !== undefined && movable !== "0") {
-          const newPos = moveWindow(windowObj, e.movementX, e.movementY)
-          const id = windowObj.getAttribute("window-id")
-          if (id) {
-            return changeDimension(id, newPos)
+          const newPos = moveWindow(windowDom, e.movementX, e.movementY)
+          if (windowId) {
+            return changeDimension(newPos)
           }
         }
         break
@@ -107,15 +99,14 @@ export const WindowManager = (props: Props) => {
           const deltaX = e.pageX - lastMousePos.x
           const deltaY = e.pageY - lastMousePos.y
           const { newPos, newSize } = resizeWindow(
-            windowObj,
+            windowDom,
             action.option?.direction,
             deltaX,
             deltaY
           )
           setLastMousePos({ x: e.pageX, y: e.pageY })
-          const id = windowObj.getAttribute("window-id")
-          if (id) {
-            changeDimension(id, newPos, newSize)
+          if (windowId) {
+            changeDimension(newPos, newSize)
             return
           }
         }

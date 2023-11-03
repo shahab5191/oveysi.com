@@ -1,16 +1,36 @@
 @import url("../../../global.module.css");
-.topBar{
-  display: flex;
+.topBar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   height: var(--topBar-height);
   width: 100%;
   background-color: var(--topBar-bg);
   color: var(--topBar-fg);
-  align-items: center;
-  justify-content: space-around;
+  padding-left: var(--topBar-padding-x);
+  padding-right: var(--topBar-padding-x);
   z-index: 999;
 }
-.date{
+.date {
   margin: 0;
   font-weight: var(--topBar-date-font-weight);
-  font-size: var(--topBar-date-font-size)
+  font-size: var(--topBar-date-font-size);
+  justify-self: center;
+}
+.topBarButton {
+  background-color: transparent;
+  border: none;
+  border-radius: var(--topBar-button-border-radius);
+  color: var(--topBar-fg);
+  padding: var(--topBar-button-padding);
+  height: min-content;
+  transition: background-color 0.2s ease-out;
+  font-weight: var(--topBar-button-font-weight);
+  font-size: var(--topBar-button-font-size);
+}
+.activities {
+  justify-self: left;
+}
+
+.topBarButton:hover {
+  background-color: var(--topBar-button-hover-bg);
 }

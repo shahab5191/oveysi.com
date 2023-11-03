@@ -30,21 +30,31 @@
   --topBar-bg: #1e1e1e;
   --topBar-height: 30px;
   --topBar-fg: #ffffff;
-  --topBar-date-font-size: 10pt;
-  --topBar-date-font-weight: bold;
+  --topBar-button-font-size: 10pt;
+  --topBar-button-font-weight: bold;
+  --topBar-padding-x: 0px;
+  --topBar-button-border-radius: 15px;
+  --topBar-button-hover-bg: #303030;
+  --topBar-button-padding: 5px 10px;
 
   --menu-bg-color: #303030;
   --menu-fg-color: #ffffff;
-  --menu-border-color: rgba(100%, 100%, 100%, .05);
+  --menu-border-color: rgba(100%, 100%, 100%, 0.05);
   --menu-shadow-color: #272727;
   --menu-border-radius: 15px;
   --menu-padding: 5px;
   --menu-list-item-hover-bg: #404040;
   --menu-list-item-border-radius: 10px;
-  --menu-list-item-min-width: 100px;
+  --menu-list-item-min-width: 150px;
   --menu-list-item-height: 30px;
   --menu-list-item-padding: 5px 20px;
+  --menu-list-item-disabled-fg: #595959;
   --menu-divider-margin: 5px 10px;
+
+  --workspace-overview-shadow-spread: 20px;
+  --workspace-overview-shadow-color: #1e1e1e;
+
+  --desktop-bg-color: #303030;
 }
 body {
   font-family: var(--font-family);

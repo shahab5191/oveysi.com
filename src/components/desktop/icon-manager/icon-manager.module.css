@@ -5,7 +5,8 @@
   left: 0;
   bottom: 0;
   width: 100vw;
-  height: calc(100% - var(--topBar-height) + 1px);
+  height: calc(100%);
+  margin-top: var(--topBar-height);
   z-index: 10;
   overflow: hidden;
 }

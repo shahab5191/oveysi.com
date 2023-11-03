@@ -1,4 +1,4 @@
-import { objectTypes } from "../../../types/enums"
+import { ActionType, objectTypes } from "../../../types/enums"
 import { AiOutlineClose } from "react-icons/ai"
 import { MdMinimize } from "react-icons/md"
 import { VscChromeMaximize } from "react-icons/vsc"
@@ -6,16 +6,27 @@ import styles from "./header-bar.module.css"
 import { useCallback, useState } from "react"
 import { Vec2 } from "../../../types/types"
 import { HeaderBarMenu } from "./header-bar-menu"
+import { useAppDispatch } from "../../../redux/hooks"
+import {
+  changeWindow,
+  setCanChangeWindow,
+  setFocusedWindow,
+  setWindowAction,
+  setWindowId,
+} from "../../../redux/slices/window-manager-slice"
 
 type Props = {
   title: string
   isFocused: boolean
-  toggleMaximize: (e: React.MouseEvent) => void
-  closeHandler: (e: React.MouseEvent) => void
+  toggleMaximize: (e?: React.MouseEvent) => void
+  closeHandler: (e?: React.MouseEvent) => void
+  winId: string
 }
 export const HeaderBar = (props: Props) => {
   const [showMenu, setShowMenu] = useState(false)
   const [clickPos, setClickPos] = useState<Vec2>({ x: 0, y: 0 })
+
+  const dispatch = useAppDispatch()
 
   const clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 2) {
@@ -23,11 +34,49 @@ export const HeaderBar = (props: Props) => {
       setShowMenu(true)
     }
   }
+  const moveHandler = useCallback(
+    (clickPos: Vec2) => {
+      const window = document.getElementById(props.winId)
+      if (!window) return
+      const width = parseInt(window.style.width)
+      const height = parseInt(window.style.height)
+      const centerX = clickPos.x - width / 2
+      const centerY = clickPos.y - height / 2
+      dispatch(
+        changeWindow({ id: props.winId, pos: { x: centerX, y: centerY } })
+      )
+      dispatch(setWindowId({ windowId: props.winId }))
+      dispatch(setWindowAction({ type: ActionType.Move }))
+      dispatch(setCanChangeWindow({ state: true }))
+    },
+    [dispatch, props.winId]
+  )
+  const minimizeHandler = useCallback(() => {}, [])
 
-  const itemClickHandler = useCallback((itemId: string) => {
-    console.log(itemId)
-    setShowMenu(false)
-  }, [])
+  const itemClickHandler = useCallback(
+    (itemId: string, clickPos: Vec2) => {
+      dispatch(setFocusedWindow({ id: props.winId }))
+
+      switch (itemId) {
+        case `win_${props.winId}_headerMenuItem_maximize`:
+          props.toggleMaximize()
+          break
+        case `win_${props.winId}_headerMenuItem_move`:
+          moveHandler(clickPos)
+          break
+        case `win_${props.winId}_headerMenuItem_hide`:
+          minimizeHandler()
+          break
+        case `win_${props.winId}_headerMenuItem_close`:
+          props.closeHandler()
+          break
+        default:
+          break
+      }
+      setShowMenu(false)
+    },
+    [dispatch, minimizeHandler, moveHandler, props]
+  )
 
   return (
     <>
@@ -70,6 +119,7 @@ export const HeaderBar = (props: Props) => {
           onClose={() => setShowMenu(false)}
           clickPos={clickPos}
           onItemClicked={itemClickHandler}
+          winId={props.winId}
         />
       ) : null}
     </>

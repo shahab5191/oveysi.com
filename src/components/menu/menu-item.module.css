@@ -16,3 +16,9 @@
   background-color: var(--menu-border-color);
   margin: var(--menu-divider-margin);
 }
+.menuListItem.disabled{
+  color:var(--menu-list-item-disabled-fg)
+}
+.menuListItem.disabled:hover{
+  background-color: transparent;
+}

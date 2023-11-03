@@ -10,7 +10,7 @@ import {
   getWindows,
   setFocusedWindow,
   toggleMaximize,
-} from "../../redux/slices/window-slice"
+} from "../../redux/slices/window-manager-slice"
 import { useDispatch } from "react-redux"
 
 interface Props {
@@ -27,7 +27,7 @@ export const Window = (props: Props) => {
   const windows = useAppSelector(getWindows)
   const dispatch = useDispatch()
 
-  const maximizeButtonClicked = (e: React.MouseEvent) => {
+  const maximizeButtonClicked = (e?: React.MouseEvent) => {
     if (!windows[props.id].maximized) {
       setAnimateTransform(true)
     } else {
@@ -37,7 +37,7 @@ export const Window = (props: Props) => {
     if (!props.isFocused) dispatch(setFocusedWindow({ id: props.id }))
   }
 
-  const closeHandler = (e: React.MouseEvent) => {
+  const closeHandler = (e?: React.MouseEvent) => {
     dispatch(closeWindow({ id: props.id }))
   }
 
@@ -58,7 +58,7 @@ export const Window = (props: Props) => {
         zIndex: windows[props.id].zIndex,
       }}
       object-type={objectTypes.WINDOW}
-      window-id={props.id}
+      id={props.id}
       is-movable={windows[props.id].maximized ? 0 : 1}
     >
       {windows[props.id].maximized ? null : <ResizeEdges />}
@@ -67,6 +67,7 @@ export const Window = (props: Props) => {
         isFocused={props.isFocused}
         toggleMaximize={maximizeButtonClicked}
         closeHandler={closeHandler}
+        winId={props.id}
       />
       <div>{props.children}</div>
     </div>
