@@ -1,0 +1,9 @@
+@import url("../../../../global.module.css");
+.IconManager {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--icon-manager-width);
+  background-color: var(--icon-manager-bg-color);
+  transition: top 0.2s ease-in-out;
+}

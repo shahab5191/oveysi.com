@@ -61,7 +61,6 @@ export const Window = (props: Props) => {
       id={props.id}
       is-movable={windows[props.id].maximized ? 0 : 1}
     >
-      {windows[props.id].maximized ? null : <ResizeEdges />}
       <HeaderBar
         title={props.title}
         isFocused={props.isFocused}
@@ -69,7 +68,8 @@ export const Window = (props: Props) => {
         closeHandler={closeHandler}
         winId={props.id}
       />
-      <div>{props.children}</div>
+      <div className={styles.childWrapper}>{props.children}</div>
+      {windows[props.id].maximized ? null : <ResizeEdges />}
     </div>
   )
 }

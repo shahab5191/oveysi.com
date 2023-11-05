@@ -85,6 +85,7 @@ export const windowSlice = createSlice({
         pos,
         size: action.payload.size,
         zIndex: state.maxZindex++,
+        children: action.payload.children,
       }
     },
     closeWindow: (state, action: PayloadAction<CloseWindow>) => {
@@ -130,7 +131,7 @@ export const getFocusedWindow = (state: RootState) => {
 export const getWindowAction = (state: RootState) => {
   return state.windowReducer.windowAction
 }
-export const isMaximized = (state:RootState,) =>{
+export const isMaximized = (state: RootState) => {
   return state.windowReducer.windows
 }
 export const {
@@ -141,6 +142,6 @@ export const {
   setFocusedWindow,
   setCanChangeWindow,
   setWindowAction,
-  setWindowId
+  setWindowId,
 } = windowSlice.actions
 export default windowSlice.reducer

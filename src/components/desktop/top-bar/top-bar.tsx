@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react"
 import styles from "./top-bar.module.css"
 import { getFormattedTime } from "../../../utilities/formatted-time"
-import { useAppDispatch } from "../../../redux/hooks"
-import { toggleIsOverview } from "../../../redux/slices/desktop-slice"
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
+import {
+  ViewState,
+  getViewState,
+  setViewState,
+} from "../../../redux/slices/desktop-slice"
 type Props = {}
 export const TopBar = (props: Props) => {
   const [time, setTime] = useState(getFormattedTime())
+  const viewstate = useAppSelector(getViewState)
   const dispatch = useAppDispatch()
 
-  const activitiesClickHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(toggleIsOverview())
+  const activitiesClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (viewstate === ViewState.desktopview)
+      dispatch(setViewState(ViewState.overview))
+    else if(viewstate === ViewState.overview)
+      dispatch(setViewState(ViewState.iconview))
+    else
+    dispatch(setViewState(ViewState.desktopview))
   }
 
   useEffect(() => {
@@ -19,7 +29,10 @@ export const TopBar = (props: Props) => {
   }, [])
   return (
     <div className={styles.topBar}>
-      <button className={`${styles.activities} ${styles.topBarButton}`} onClick={activitiesClickHandler}>
+      <button
+        className={`${styles.activities} ${styles.topBarButton}`}
+        onClick={activitiesClickHandler}
+      >
         Activities
       </button>
       <button className={`${styles.date} ${styles.topBarButton}`}>

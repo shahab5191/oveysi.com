@@ -1,27 +1,29 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../store"
 
+export enum ViewState {
+  desktopview,
+  overview,
+  iconview,
+}
 interface State {
-  overview: boolean
+  viewState: ViewState
 }
 
 export const desktopSlice = createSlice({
   name: "desktop",
   initialState: {
-    overview: true,
+    viewState: ViewState.iconview,
   } as State,
   reducers: {
-    toggleIsOverview: (state) => {
-      state.overview = !state.overview
-    },
-    setIsOverview: (state, action: PayloadAction<boolean>) => {
-      state.overview = action.payload
+    setViewState: (state, action: PayloadAction<ViewState>) => {
+      state.viewState = action.payload
     },
   },
 })
-export const getIsOverview = (state: RootState) => {
-  return state.desktopReducer.overview
+export const getViewState = (state: RootState) => {
+  return state.desktopReducer.viewState
 }
 
-export const { setIsOverview,toggleIsOverview } = desktopSlice.actions
+export const { setViewState } = desktopSlice.actions
 export default desktopSlice.reducer

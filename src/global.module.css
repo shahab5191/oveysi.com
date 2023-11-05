@@ -4,7 +4,7 @@
   --headerBar-bg: #303030;
   --headerBar-bg-unfocused: #242424;
   --headerBar-fg: #ffffff;
-  --headerBar-height: 30px;
+  --headerBar-height: 25px;
   --headerBar-title-color: #ffffff;
   --headerBar-padding: 5px;
   --headerBar-border-color: rgba(0, 0, 0, 0.36);
@@ -54,7 +54,16 @@
   --workspace-overview-shadow-spread: 20px;
   --workspace-overview-shadow-color: #1e1e1e;
 
-  --desktop-bg-color: #303030;
+  --workspace-bg-color: #303030;
+
+  --docker-height: 100px;
+  --docker-width: max-content;
+  --docker-padding: 5px;
+  --docker-bg-color: #404040;
+  --docker-border-radius: 15px;
+
+  --icon-manager-width: 80%;
+  --icon-manager-bg-color: red;
 }
 body {
   font-family: var(--font-family);

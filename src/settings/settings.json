@@ -2,5 +2,13 @@
   "windowResizeOffset": 10,
   "wallpaper": "images/garud-linux-wallpaper.jpg",
   "newWindowPos": "cascade",
-  "cascadeGap": 50
+  "cascadeGap": 50,
+  "topBarHeight": 30,
+  "viewState":{
+    "iconViewScale": 0.15,
+    "overViewScale": 0.75
+  },
+  "docker":{
+    "dockerHeight": 70
+  }
 }

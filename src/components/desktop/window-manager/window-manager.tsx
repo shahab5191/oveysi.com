@@ -127,7 +127,7 @@ export const WindowManager = (props: Props) => {
           id={windowsList[key].id}
           title={windowsList[key].title}
           key={i}
-        ></Window>
+        >{windowsList[key].children}</Window>
       )
       i++
     }

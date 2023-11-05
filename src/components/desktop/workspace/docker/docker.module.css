@@ -1,0 +1,11 @@
+@import url("../../../../global.module.css");
+.DockerContainer{
+  position: absolute;
+  width: var(--docker-width);
+  background-color: var(--docker-bg-color);
+  border-radius: var(--docker-border-radius);
+  bottom: 10px;
+  left: 50%;
+  padding: var(--docker-padding);
+  transform:translateX(-50%)
+}

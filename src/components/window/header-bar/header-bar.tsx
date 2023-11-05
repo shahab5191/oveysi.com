@@ -84,6 +84,7 @@ export const HeaderBar = (props: Props) => {
         className={`${styles.topBar} ${props.isFocused ? styles.focused : ""}`}
         object-type={objectTypes.TOP_BAR}
         onMouseDown={clickHandler}
+        onDoubleClick={props.toggleMaximize}
       >
         <h2 className={styles.header} object-type={objectTypes.TOP_BAR}>
           {props.title}
