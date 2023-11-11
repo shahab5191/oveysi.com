@@ -3,7 +3,7 @@ import { Window } from "../../window/window"
 import styles from "./window-manager.module.css"
 import { ActionType, objectTypes, windowEdges } from "../../../types/enums"
 import { moveWindow, resizeWindow } from "./functions"
-import { Vec2 } from "../../../types/types"
+import { Action, Vec2 } from "../../../types/types"
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
 import {
   getFocusedWindow,
@@ -15,6 +15,7 @@ import {
   setWindowId,
 } from "../../../redux/slices/window-manager-slice"
 import { changeWindow } from "../../../redux/slices/window-manager-slice"
+import { ViewState, getViewState } from "../../../redux/slices/desktop-slice"
 
 interface Props {}
 export const WindowManager = (props: Props) => {
@@ -22,7 +23,7 @@ export const WindowManager = (props: Props) => {
   const { canChangWindow, action, windowId } = useAppSelector(getWindowAction)
   const windowsList = useAppSelector(getWindows)
   const focusedWindow = useAppSelector(getFocusedWindow)
-
+  const viewstate = useAppSelector(getViewState)
   const dispatch = useAppDispatch()
 
   const changeDimension = (newPos?: Vec2, newSize?: Vec2) => {
@@ -36,48 +37,98 @@ export const WindowManager = (props: Props) => {
   ) => {
     const id = window.id
     if (!id) return
-    dispatch(setWindowId({ windowId: id }))
-    dispatch(setCanChangeWindow({ state: true }))
-    dispatch(setWindowAction(action))
+    dispatch(setWindowAction({ action, id }))
     setLastMousePos({ x: e.pageX, y: e.pageY })
-    dispatch(setFocusedWindow({ id }))
   }
 
-  const checkForWindowMove = (e: React.MouseEvent) => {
+  const getWindowObject = (
+    e: React.MouseEvent
+  ): { window: HTMLDivElement | null; action: Action | null } => {
     if (e.target) {
       const target = e.target as HTMLDivElement
       if (target.getAttribute("object-type") === objectTypes.WINDOW) {
-        initializeWindowChange(e, target, { type: ActionType.Move })
+        return {
+          window: target,
+          action: {
+            type: ActionType.Move,
+          },
+        }
       } else if (
         target.getAttribute("object-type") === objectTypes.WINDOW_EDGE
       ) {
         const direction = target.getAttribute("window-edge") as windowEdges
         if (direction) {
           const window = target.parentElement as HTMLDivElement
-          initializeWindowChange(e, window, {
-            type: ActionType.Resize,
-            option: { direction },
-          })
+          return {
+            window,
+            action: {
+              type: ActionType.Resize,
+              option: { direction },
+            },
+          }
         }
       } else if (target.getAttribute("object-type")) {
         const window = target.closest(
           `[object-type=${objectTypes.WINDOW}]`
         ) as HTMLDivElement
-        if (!window) return
-        initializeWindowChange(e, window, { type: ActionType.Move })
+        if (window) {
+          return {
+            window: window,
+            action: {
+              type: ActionType.Move,
+            },
+          }
+        }
+      }
+    }
+    return { window: null, action: null }
+  }
+
+  // const checkForWindowMove = (e: React.MouseEvent) => {
+  //   if (e.target) {
+  //     const target = e.target as HTMLDivElement
+  //     if (target.getAttribute("object-type") === objectTypes.WINDOW) {
+  //       initializeWindowChange(e, target, { type: ActionType.Move })
+  //     } else if (
+  //       target.getAttribute("object-type") === objectTypes.WINDOW_EDGE
+  //     ) {
+  //       const direction = target.getAttribute("window-edge") as windowEdges
+  //       if (direction) {
+  //         const window = target.parentElement as HTMLDivElement
+  //         initializeWindowChange(e, window, {
+  //           type: ActionType.Resize,
+  //           option: { direction },
+  //         })
+  //       }
+  //     } else if (target.getAttribute("object-type")) {
+  //       const window = target.closest(
+  //         `[object-type=${objectTypes.WINDOW}]`
+  //       ) as HTMLDivElement
+  //       if (!window) return
+  //       initializeWindowChange(e, window, { type: ActionType.Move })
+  //     }
+  //   }
+  // }
+
+  const mouseDownHandler = (e: React.MouseEvent) => {
+    if (e.button === 0) {
+      const { window, action } = getWindowObject(e)
+      if (!window || !action) return
+      if (viewstate === ViewState.desktopview) {
+        initializeWindowChange(e, window, action)
+      } else {
+        const id = window.getAttribute("id")
+        if (!id) return
+        dispatch(setFocusedWindow({ id }))
       }
     }
   }
 
-  const mouseDownHandler = (e: React.MouseEvent) => {
-    if (e.button === 0) {
-      checkForWindowMove(e)
-    }
-  }
   const mouseUpHandler = (e: React.MouseEvent) => {
     dispatch(setCanChangeWindow({ state: false }))
     dispatch(setWindowId({}))
   }
+
   const mouseMoveHandler = (e: React.MouseEvent) => {
     if (!canChangWindow) return
     if (windowId === undefined) return
@@ -127,7 +178,9 @@ export const WindowManager = (props: Props) => {
           id={windowsList[key].id}
           title={windowsList[key].title}
           key={i}
-        >{windowsList[key].children}</Window>
+        >
+          {windowsList[key].children}
+        </Window>
       )
       i++
     }

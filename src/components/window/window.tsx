@@ -12,6 +12,7 @@ import {
   toggleMaximize,
 } from "../../redux/slices/window-manager-slice"
 import { useDispatch } from "react-redux"
+import { ViewState, getViewState } from "../../redux/slices/desktop-slice"
 
 interface Props {
   pos: Vec2
@@ -25,6 +26,7 @@ interface Props {
 export const Window = (props: Props) => {
   const [animateTransform, setAnimateTransform] = useState(false)
   const windows = useAppSelector(getWindows)
+  const viewstate = useAppSelector(getViewState)
   const dispatch = useDispatch()
 
   const maximizeButtonClicked = (e?: React.MouseEvent) => {
@@ -45,7 +47,9 @@ export const Window = (props: Props) => {
     <div
       className={`${styles.window} ${props.isFocused ? styles.focused : ""} ${
         windows[props.id].maximized ? styles.maximized : ""
-      } ${animateTransform ? styles.animateTransform : ""}`}
+      } ${animateTransform ? styles.animateTransform : ""} ${
+        viewstate !== ViewState.desktopview ? styles.overview : ""
+      }`}
       style={{
         left: windows[props.id].maximized ? 0 : windows[props.id].pos.x,
         top: windows[props.id].maximized ? 0 : windows[props.id].pos.y,
@@ -68,7 +72,9 @@ export const Window = (props: Props) => {
         closeHandler={closeHandler}
         winId={props.id}
       />
-      <div className={styles.childWrapper}>{props.children}</div>
+      <div className={styles.childWrapper} object-type="window-body">
+        {props.children}
+      </div>
       {windows[props.id].maximized ? null : <ResizeEdges />}
     </div>
   )

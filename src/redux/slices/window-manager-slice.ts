@@ -116,8 +116,12 @@ export const windowSlice = createSlice({
     setWindowId: (state, action: PayloadAction<{ windowId?: string }>) => {
       state.windowAction.windowId = action.payload.windowId
     },
-    setWindowAction: (state, action: PayloadAction<Action>) => {
-      state.windowAction.action = action.payload
+    setWindowAction: (state, action: PayloadAction<{id:string, action:Action}>) => {
+      state.windowAction.action = action.payload.action
+      state.windowAction.windowId = action.payload.id
+      state.windowAction.canChangWindow = true
+      state.focusedWindow = action.payload.id
+      state.windows[action.payload.id].zIndex = state.maxZindex++
     },
   },
 })

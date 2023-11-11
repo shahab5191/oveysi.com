@@ -9,10 +9,8 @@ import { HeaderBarMenu } from "./header-bar-menu"
 import { useAppDispatch } from "../../../redux/hooks"
 import {
   changeWindow,
-  setCanChangeWindow,
   setFocusedWindow,
   setWindowAction,
-  setWindowId,
 } from "../../../redux/slices/window-manager-slice"
 
 type Props = {
@@ -45,9 +43,9 @@ export const HeaderBar = (props: Props) => {
       dispatch(
         changeWindow({ id: props.winId, pos: { x: centerX, y: centerY } })
       )
-      dispatch(setWindowId({ windowId: props.winId }))
-      dispatch(setWindowAction({ type: ActionType.Move }))
-      dispatch(setCanChangeWindow({ state: true }))
+      dispatch(
+        setWindowAction({ id: props.winId, action: { type: ActionType.Move } })
+      )
     },
     [dispatch, props.winId]
   )

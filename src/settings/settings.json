@@ -9,6 +9,6 @@
     "overViewScale": 0.75
   },
   "docker":{
-    "dockerHeight": 70
+    "dockerHeight": 65
   }
 }

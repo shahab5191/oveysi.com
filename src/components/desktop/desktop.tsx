@@ -1,12 +1,16 @@
 import { TopBar } from "./top-bar/top-bar"
 import { WindowManager } from "./window-manager/window-manager"
 import styles from "./desktop.module.css"
-import { ReactNode, useEffect, useMemo } from "react"
+import { ReactNode, useCallback, useEffect, useMemo } from "react"
 import { useDispatch } from "react-redux"
 import { openWindow } from "../../redux/slices/window-manager-slice"
 import { Vec2 } from "../../types/types"
 import { useAppSelector } from "../../redux/hooks"
-import { ViewState, getViewState } from "../../redux/slices/desktop-slice"
+import {
+  ViewState,
+  getViewState,
+  setViewState,
+} from "../../redux/slices/desktop-slice"
 import settings from "../../settings/settings.json"
 import { Workspace } from "./workspace/workspace"
 interface AddWindow {
@@ -29,6 +33,12 @@ export const Desktop = (props: Props) => {
       },
     [dispatch]
   )
+
+  const desktopClickHandler = useCallback(() => {
+    if (viewState !== ViewState.desktopview) {
+      dispatch(setViewState(ViewState.desktopview))
+    }
+  }, [dispatch, viewState])
 
   useEffect(() => {
     addWindow({
@@ -59,6 +69,7 @@ export const Desktop = (props: Props) => {
           backgroundImage: `url(${settings.wallpaper})`,
           backgroundSize: "cover",
         }}
+        onClick={desktopClickHandler}
       >
         <WindowManager />
       </div>

@@ -54,16 +54,20 @@
   --workspace-overview-shadow-spread: 20px;
   --workspace-overview-shadow-color: #1e1e1e;
 
-  --workspace-bg-color: #303030;
+  --workspace-bg-color: #282828;
 
   --docker-height: 100px;
   --docker-width: max-content;
   --docker-padding: 5px;
-  --docker-bg-color: #404040;
+  --docker-bg-color: #3d3d3d;
   --docker-border-radius: 15px;
 
   --icon-manager-width: 80%;
   --icon-manager-bg-color: red;
+
+  --icon-hover-bg-color: #545454;
+  --icon-padding: 5px;
+  --icon-border-radius: 15px;
 }
 body {
   font-family: var(--font-family);

@@ -16,10 +16,7 @@ export const TopBar = (props: Props) => {
   const activitiesClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (viewstate === ViewState.desktopview)
       dispatch(setViewState(ViewState.overview))
-    else if(viewstate === ViewState.overview)
-      dispatch(setViewState(ViewState.iconview))
-    else
-    dispatch(setViewState(ViewState.desktopview))
+    else dispatch(setViewState(ViewState.desktopview))
   }
 
   useEffect(() => {

@@ -4,6 +4,7 @@
   border-top-right-radius: var(--window-radius);
   border-top-left-radius: var(--window-radius);
   border: 1px solid var(--window-border-color);
+  transition: scale 0.2s ease-out;
 }
 
 .window.focused{
@@ -16,6 +17,10 @@
 
 .window.animateTransform{
   transition: left 0.2s ease-out, top 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out
+}
+
+.window.overview:hover{
+  scale: 105%;
 }
 
 .childWrapper{

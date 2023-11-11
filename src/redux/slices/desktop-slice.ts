@@ -13,7 +13,7 @@ interface State {
 export const desktopSlice = createSlice({
   name: "desktop",
   initialState: {
-    viewState: ViewState.iconview,
+    viewState: ViewState.desktopview,
   } as State,
   reducers: {
     setViewState: (state, action: PayloadAction<ViewState>) => {

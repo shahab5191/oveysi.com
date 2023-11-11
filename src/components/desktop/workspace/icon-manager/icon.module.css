@@ -1,0 +1,9 @@
+.Icon{
+  transition: background-color 0.2s ease-out;
+  padding: var(--icon-padding);
+  border-radius: var(--icon-border-radius);
+}
+
+.Icon:hover{
+  background-color: var(--icon-hover-bg-color);
+}
