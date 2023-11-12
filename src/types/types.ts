@@ -13,6 +13,9 @@ export interface WindowProperties {
   children?: ReactNode
   maximized: boolean
   zIndex: number
+  scale: number
+  canAnimate: boolean
+  lastPos: Vec2
 }
 
 export interface Action {

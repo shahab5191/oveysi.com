@@ -1,4 +1,4 @@
-import { ReactElement, useMemo, useState } from "react"
+import { ReactElement, useCallback, useState } from "react"
 import { Window } from "../../window/window"
 import styles from "./window-manager.module.css"
 import { ActionType, objectTypes, windowEdges } from "../../../types/enums"
@@ -13,12 +13,17 @@ import {
   setFocusedWindow,
   setWindowAction,
   setWindowId,
+  toggleCanAnimate,
 } from "../../../redux/slices/window-manager-slice"
-import { changeWindow } from "../../../redux/slices/window-manager-slice"
-import { ViewState, getViewState } from "../../../redux/slices/desktop-slice"
+import {
+  changeWindow,
+  ViewState,
+  getViewState,
+} from "../../../redux/slices/window-manager-slice"
 
 interface Props {}
 export const WindowManager = (props: Props) => {
+  const [currentWindow, setCurrentWindow] = useState<string>("")
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
   const { canChangWindow, action, windowId } = useAppSelector(getWindowAction)
   const windowsList = useAppSelector(getWindows)
@@ -84,41 +89,18 @@ export const WindowManager = (props: Props) => {
     return { window: null, action: null }
   }
 
-  // const checkForWindowMove = (e: React.MouseEvent) => {
-  //   if (e.target) {
-  //     const target = e.target as HTMLDivElement
-  //     if (target.getAttribute("object-type") === objectTypes.WINDOW) {
-  //       initializeWindowChange(e, target, { type: ActionType.Move })
-  //     } else if (
-  //       target.getAttribute("object-type") === objectTypes.WINDOW_EDGE
-  //     ) {
-  //       const direction = target.getAttribute("window-edge") as windowEdges
-  //       if (direction) {
-  //         const window = target.parentElement as HTMLDivElement
-  //         initializeWindowChange(e, window, {
-  //           type: ActionType.Resize,
-  //           option: { direction },
-  //         })
-  //       }
-  //     } else if (target.getAttribute("object-type")) {
-  //       const window = target.closest(
-  //         `[object-type=${objectTypes.WINDOW}]`
-  //       ) as HTMLDivElement
-  //       if (!window) return
-  //       initializeWindowChange(e, window, { type: ActionType.Move })
-  //     }
-  //   }
-  // }
-
   const mouseDownHandler = (e: React.MouseEvent) => {
     if (e.button === 0) {
       const { window, action } = getWindowObject(e)
       if (!window || !action) return
+      const id = window.getAttribute("id")
+      if (!id) return
+      setCurrentWindow(id)
+      dispatch(toggleCanAnimate({ windowId: id }))
+
       if (viewstate === ViewState.desktopview) {
         initializeWindowChange(e, window, action)
       } else {
-        const id = window.getAttribute("id")
-        if (!id) return
         dispatch(setFocusedWindow({ id }))
       }
     }
@@ -127,6 +109,8 @@ export const WindowManager = (props: Props) => {
   const mouseUpHandler = (e: React.MouseEvent) => {
     dispatch(setCanChangeWindow({ state: false }))
     dispatch(setWindowId({}))
+    if (currentWindow) dispatch(toggleCanAnimate({ windowId: currentWindow }))
+    setCurrentWindow("")
   }
 
   const mouseMoveHandler = (e: React.MouseEvent) => {
@@ -166,7 +150,7 @@ export const WindowManager = (props: Props) => {
     }
   }
 
-  const createWindowNodes = useMemo(() => {
+  const createWindowNodes = useCallback(() => {
     const arrayOfWindows: ReactElement[] = []
     let i = 0
     for (let key in windowsList) {
@@ -194,7 +178,7 @@ export const WindowManager = (props: Props) => {
       onMouseUp={mouseUpHandler}
       onMouseMove={mouseMoveHandler}
     >
-      {createWindowNodes}
+      {createWindowNodes()}
     </div>
   )
 }

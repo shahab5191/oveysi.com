@@ -2,7 +2,7 @@ import styles from "./window.module.css"
 import { ResizeEdges } from "./resize-area"
 import { objectTypes } from "../../types/enums"
 import { Vec2 } from "../../types/types"
-import { ReactNode, useState } from "react"
+import { ReactNode } from "react"
 import { HeaderBar } from "./header-bar/header-bar"
 import { useAppSelector } from "../../redux/hooks"
 import {
@@ -12,7 +12,10 @@ import {
   toggleMaximize,
 } from "../../redux/slices/window-manager-slice"
 import { useDispatch } from "react-redux"
-import { ViewState, getViewState } from "../../redux/slices/desktop-slice"
+import {
+  ViewState,
+  getViewState,
+} from "../../redux/slices/window-manager-slice"
 
 interface Props {
   pos: Vec2
@@ -24,17 +27,11 @@ interface Props {
 }
 
 export const Window = (props: Props) => {
-  const [animateTransform, setAnimateTransform] = useState(false)
   const windows = useAppSelector(getWindows)
   const viewstate = useAppSelector(getViewState)
   const dispatch = useDispatch()
 
   const maximizeButtonClicked = (e?: React.MouseEvent) => {
-    if (!windows[props.id].maximized) {
-      setAnimateTransform(true)
-    } else {
-      setTimeout(() => setAnimateTransform(false), 200)
-    }
     dispatch(toggleMaximize({ id: props.id }))
     if (!props.isFocused) dispatch(setFocusedWindow({ id: props.id }))
   }
@@ -47,19 +44,16 @@ export const Window = (props: Props) => {
     <div
       className={`${styles.window} ${props.isFocused ? styles.focused : ""} ${
         windows[props.id].maximized ? styles.maximized : ""
-      } ${animateTransform ? styles.animateTransform : ""} ${
-        viewstate !== ViewState.desktopview ? styles.overview : ""
+      } ${viewstate !== ViewState.desktopview ? styles.overview : ""} ${
+        windows[props.id].canAnimate ? styles.canAnimate : ""
       }`}
       style={{
-        left: windows[props.id].maximized ? 0 : windows[props.id].pos.x,
-        top: windows[props.id].maximized ? 0 : windows[props.id].pos.y,
-        width: windows[props.id].maximized
-          ? "calc(100% - 2px)"
-          : windows[props.id].size.x,
-        height: windows[props.id].maximized
-          ? "calc(100% - 2px)"
-          : windows[props.id].size.y,
+        left: windows[props.id].pos.x,
+        top: windows[props.id].pos.y,
+        width: windows[props.id].size.x,
+        height: windows[props.id].size.y,
         zIndex: windows[props.id].zIndex,
+        transform: `scale(${windows[props.id].scale})`,
       }}
       object-type={objectTypes.WINDOW}
       id={props.id}

@@ -4,6 +4,7 @@ import { RootState } from "../store"
 import { ReactNode } from "react"
 import settings from "../../settings/settings.json"
 import { ActionType, SettingsNewWindowPos } from "../../types/enums"
+import { arrangeWindows } from "../../utilities/arrange-windows"
 
 interface State {
   windows: Record<string, WindowProperties>
@@ -16,6 +17,7 @@ interface State {
     action: Action
     windowId?: string
   }
+  viewState: ViewState
 }
 
 interface OpenWindow {
@@ -35,6 +37,12 @@ interface ChangeWindow {
   size?: Vec2
 }
 
+export enum ViewState {
+  desktopview,
+  overview,
+  iconview,
+}
+
 export const windowSlice = createSlice({
   name: "window",
   initialState: {
@@ -47,6 +55,10 @@ export const windowSlice = createSlice({
       canChangWindow: false,
       action: { type: ActionType.Move },
       windowId: undefined,
+    },
+    viewState: ViewState.overview,
+    windowsLastState: {
+      positions: [],
     },
   } as State,
   reducers: {
@@ -86,6 +98,9 @@ export const windowSlice = createSlice({
         size: action.payload.size,
         zIndex: state.maxZindex++,
         children: action.payload.children,
+        scale: 1,
+        canAnimate: true,
+        lastPos: pos,
       }
     },
     closeWindow: (state, action: PayloadAction<CloseWindow>) => {
@@ -98,7 +113,6 @@ export const windowSlice = createSlice({
         state.windows[action.payload.id].pos = action.payload.pos
       if (action.payload.size)
         state.windows[action.payload.id].size = action.payload.size
-
       return state
     },
     toggleMaximize: (state, action: PayloadAction<{ id: string }>) => {
@@ -116,12 +130,37 @@ export const windowSlice = createSlice({
     setWindowId: (state, action: PayloadAction<{ windowId?: string }>) => {
       state.windowAction.windowId = action.payload.windowId
     },
-    setWindowAction: (state, action: PayloadAction<{id:string, action:Action}>) => {
+    setWindowAction: (
+      state,
+      action: PayloadAction<{ id: string; action: Action }>
+    ) => {
       state.windowAction.action = action.payload.action
       state.windowAction.windowId = action.payload.id
       state.windowAction.canChangWindow = true
       state.focusedWindow = action.payload.id
       state.windows[action.payload.id].zIndex = state.maxZindex++
+    },
+    setViewState: (state, action: PayloadAction<ViewState>) => {
+      if (state.viewState === ViewState.desktopview) {
+        const { positions, scale } = arrangeWindows(state.windows)
+        let i = 0
+        for (let key in state.windows) {
+          state.windows[key].lastPos = state.windows[key].pos
+          state.windows[key].pos = positions[i]
+          state.windows[key].scale = scale
+          i++
+        }
+      } else if (action.payload === ViewState.desktopview) {
+        for (let key in state.windows) {
+          state.windows[key].pos = state.windows[key].lastPos
+          state.windows[key].scale = 1
+        }
+      }
+      state.viewState = action.payload
+    },
+    toggleCanAnimate: (state, action: PayloadAction<{ windowId: string }>) => {
+      state.windows[action.payload.windowId].canAnimate =
+        !state.windows[action.payload.windowId].canAnimate
     },
   },
 })
@@ -138,6 +177,9 @@ export const getWindowAction = (state: RootState) => {
 export const isMaximized = (state: RootState) => {
   return state.windowReducer.windows
 }
+export const getViewState = (state: RootState) => {
+  return state.windowReducer.viewState
+}
 export const {
   openWindow,
   closeWindow,
@@ -147,5 +189,7 @@ export const {
   setCanChangeWindow,
   setWindowAction,
   setWindowId,
+  setViewState,
+  toggleCanAnimate,
 } = windowSlice.actions
 export default windowSlice.reducer

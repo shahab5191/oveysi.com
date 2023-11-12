@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit"
 import windowReducer from "./slices/window-manager-slice"
-import desktopReducer from "./slices/desktop-slice"
 
 export const store = configureStore({
   reducer: {
     windowReducer,
-    desktopReducer,
   },
 })
 

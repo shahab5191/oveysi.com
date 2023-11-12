@@ -10,7 +10,7 @@ import {
   ViewState,
   getViewState,
   setViewState,
-} from "../../redux/slices/desktop-slice"
+} from "../../redux/slices/window-manager-slice"
 import settings from "../../settings/settings.json"
 import { Workspace } from "./workspace/workspace"
 interface AddWindow {
@@ -52,7 +52,19 @@ export const Desktop = (props: Props) => {
       size: { x: 600, y: 400 },
       id: "2234",
     })
+    addWindow({
+      title: "window 3",
+      size: { x: 300, y: 200 },
+      id: "1264",
+      children: "test\ntest",
+    })
+    addWindow({
+      title: "window 4",
+      size: { x: 600, y: 400 },
+      id: "2274",
+    })
   }, [addWindow])
+
   return (
     <div
       className={`${styles.workspace} ${viewState ? styles.isOverview : ""}`}

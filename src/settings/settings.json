@@ -6,7 +6,8 @@
   "topBarHeight": 30,
   "viewState":{
     "iconViewScale": 0.15,
-    "overViewScale": 0.75
+    "overViewScale": 0.75,
+    "gap": 15
   },
   "docker":{
     "dockerHeight": 65

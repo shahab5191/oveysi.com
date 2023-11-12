@@ -6,7 +6,7 @@ import {
   ViewState,
   getViewState,
   setViewState,
-} from "../../../redux/slices/desktop-slice"
+} from "../../../redux/slices/window-manager-slice"
 type Props = {}
 export const TopBar = (props: Props) => {
   const [time, setTime] = useState(getFormattedTime())

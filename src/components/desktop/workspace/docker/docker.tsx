@@ -9,7 +9,7 @@ import {
   ViewState,
   getViewState,
   setViewState,
-} from "../../../../redux/slices/desktop-slice"
+} from "../../../../redux/slices/window-manager-slice"
 
 interface Props {}
 export const Docker = (props: Props) => {

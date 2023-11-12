@@ -3,7 +3,7 @@ import { IconManager } from "./icon-manager/icon-manager"
 import { Docker } from "./docker/docker"
 import { useEffect, useState } from "react"
 import { useAppSelector } from "../../../redux/hooks"
-import { ViewState, getViewState } from "../../../redux/slices/desktop-slice"
+import { ViewState, getViewState } from "../../../redux/slices/window-manager-slice"
 import settings from "../../../settings/settings.json"
 
 interface Props {}
