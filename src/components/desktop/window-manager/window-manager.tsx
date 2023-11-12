@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useState } from "react"
+import { useState } from "react"
 import { Window } from "../../window/window"
 import styles from "./window-manager.module.css"
 import { ActionType, objectTypes, windowEdges } from "../../../types/enums"
@@ -150,27 +150,6 @@ export const WindowManager = (props: Props) => {
     }
   }
 
-  const createWindowNodes = useCallback(() => {
-    const arrayOfWindows: ReactElement[] = []
-    let i = 0
-    for (let key in windowsList) {
-      arrayOfWindows.push(
-        <Window
-          pos={windowsList[key].pos}
-          size={windowsList[key].size}
-          isFocused={focusedWindow === windowsList[key].id}
-          id={windowsList[key].id}
-          title={windowsList[key].title}
-          key={i}
-        >
-          {windowsList[key].children}
-        </Window>
-      )
-      i++
-    }
-    return arrayOfWindows
-  }, [windowsList, focusedWindow])
-
   return (
     <div
       className={styles.windowManager}
@@ -178,7 +157,20 @@ export const WindowManager = (props: Props) => {
       onMouseUp={mouseUpHandler}
       onMouseMove={mouseMoveHandler}
     >
-      {createWindowNodes()}
+      {Object.keys(windowsList).map((key,i) => {
+        return (
+          <Window
+            pos={windowsList[key].pos}
+            size={windowsList[key].size}
+            isFocused={focusedWindow === windowsList[key].id}
+            id={windowsList[key].id}
+            title={windowsList[key].title}
+            key={i}
+          >
+            {windowsList[key].children}
+          </Window>
+        )
+      })}
     </div>
   )
 }

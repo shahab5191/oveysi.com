@@ -39,7 +39,11 @@ export const Window = (props: Props) => {
   const closeHandler = (e?: React.MouseEvent) => {
     dispatch(closeWindow({ id: props.id }))
   }
-
+  console.log(
+    windows[props.id].title,
+    windows[props.id].size.x,
+    windows[props.id].size.y
+  )
   return (
     <div
       className={`${styles.window} ${props.isFocused ? styles.focused : ""} ${
@@ -48,7 +52,7 @@ export const Window = (props: Props) => {
         windows[props.id].canAnimate ? styles.canAnimate : ""
       }`}
       style={{
-        left: windows[props.id].pos.x,
+        left: windows[props.id].pos.x || 100,
         top: windows[props.id].pos.y,
         width: windows[props.id].size.x,
         height: windows[props.id].size.y,

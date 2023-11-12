@@ -19,7 +19,6 @@ interface State {
   }
   viewState: ViewState
 }
-
 interface OpenWindow {
   id: string
   title: string
@@ -30,13 +29,11 @@ interface OpenWindow {
 interface CloseWindow {
   id: string
 }
-
 interface ChangeWindow {
   id: string
   pos?: Vec2
   size?: Vec2
 }
-
 export enum ViewState {
   desktopview,
   overview,
@@ -57,9 +54,6 @@ export const windowSlice = createSlice({
       windowId: undefined,
     },
     viewState: ViewState.overview,
-    windowsLastState: {
-      positions: [],
-    },
   } as State,
   reducers: {
     openWindow: (state, action: PayloadAction<OpenWindow>) => {
@@ -100,12 +94,14 @@ export const windowSlice = createSlice({
         children: action.payload.children,
         scale: 1,
         canAnimate: true,
-        lastPos: pos,
+        lasState: { pos, size: action.payload.size },
       }
     },
     closeWindow: (state, action: PayloadAction<CloseWindow>) => {
       if (state.windows[action.payload.id] === undefined) return state
-      delete state.windows[action.payload.id]
+      const temp = JSON.parse(JSON.stringify(state.windows))
+      delete temp[action.payload.id]
+      state.windows = { ...temp }
     },
     changeWindow: (state, action: PayloadAction<ChangeWindow>) => {
       if (state.windows[action.payload.id] === undefined) return state
@@ -143,16 +139,14 @@ export const windowSlice = createSlice({
     setViewState: (state, action: PayloadAction<ViewState>) => {
       if (state.viewState === ViewState.desktopview) {
         const { positions, scale } = arrangeWindows(state.windows)
-        let i = 0
         for (let key in state.windows) {
-          state.windows[key].lastPos = state.windows[key].pos
-          state.windows[key].pos = positions[i]
+          state.windows[key].lasState.pos = state.windows[key].pos
+          state.windows[key].pos = positions[key]
           state.windows[key].scale = scale
-          i++
         }
       } else if (action.payload === ViewState.desktopview) {
         for (let key in state.windows) {
-          state.windows[key].pos = state.windows[key].lastPos
+          state.windows[key].pos = state.windows[key].lasState.pos
           state.windows[key].scale = 1
         }
       }
@@ -192,4 +186,5 @@ export const {
   setViewState,
   toggleCanAnimate,
 } = windowSlice.actions
+
 export default windowSlice.reducer

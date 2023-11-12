@@ -1,4 +1,4 @@
-import { WindowProperties } from "../types/types"
+import { Vec2, WindowProperties } from "../types/types"
 import settings from "../settings/settings.json"
 
 function isKey<T extends object>(x: T, k: PropertyKey): k is keyof T {
@@ -7,13 +7,12 @@ function isKey<T extends object>(x: T, k: PropertyKey): k is keyof T {
 
 export const arrangeWindows = (
   windows: Record<string, WindowProperties>
-): { positions: Array<{ x: number; y: number }>; scale: number } => {
+): { positions: Record<string, Vec2>; scale: number } => {
   const screenH = window.innerHeight
   const screenW = window.innerWidth
   const gap = settings.viewState.gap
-  const winLen = Object.keys(windows).length
 
-  let positions = new Array<{ x: number; y: number }>(winLen)
+  let positions: Record<string, Vec2> = {}
   let lastScale = 0
   let scale = 1
   do {
@@ -21,11 +20,10 @@ export const arrangeWindows = (
     let totalHeight = gap
     let currentWidth = gap
     let currentMaxHeight = gap
-    let k = 0
     for (let key in windows) {
       if (isKey(windows, key)) {
         const window = document.getElementById(windows[key].id)
-        if (!window) return { positions: [], scale: 1 }
+        if (!window) return { positions: {}, scale: 1 }
         let pos = { x: 0, y: 0 }
         let winH = window.getBoundingClientRect().height * scale
         let winW = window.getBoundingClientRect().width * scale
@@ -38,15 +36,14 @@ export const arrangeWindows = (
           currentWidth = winW + gap
         }
 
-        if (totalHeight + winH + gap*2 >= screenH) {
+        if (totalHeight + winH + gap * 2 >= screenH) {
           scale -= 0.01
           break
         }
 
         pos.x = currentWidth - winW
         pos.y = totalHeight
-        positions[k] = pos
-        k++
+        positions[windows[key].id] = pos
       }
     }
   } while (lastScale >= scale + 0.01 || lastScale <= scale - 0.01)

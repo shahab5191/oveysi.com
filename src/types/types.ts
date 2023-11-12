@@ -15,7 +15,7 @@ export interface WindowProperties {
   zIndex: number
   scale: number
   canAnimate: boolean
-  lastPos: Vec2
+  lasState: { pos: Vec2; size: Vec2 }
 }
 
 export interface Action {
