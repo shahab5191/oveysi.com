@@ -13,7 +13,6 @@ import {
   setFocusedWindow,
   setWindowAction,
   setWindowId,
-  toggleCanAnimate,
 } from "../../../redux/slices/window-manager-slice"
 import {
   changeWindow,
@@ -23,7 +22,6 @@ import {
 
 interface Props {}
 export const WindowManager = (props: Props) => {
-  const [currentWindow, setCurrentWindow] = useState<string>("")
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
   const { canChangWindow, action, windowId } = useAppSelector(getWindowAction)
   const windowsList = useAppSelector(getWindows)
@@ -95,8 +93,6 @@ export const WindowManager = (props: Props) => {
       if (!window || !action) return
       const id = window.getAttribute("id")
       if (!id) return
-      setCurrentWindow(id)
-      dispatch(toggleCanAnimate({ windowId: id }))
 
       if (viewstate === ViewState.desktopview) {
         initializeWindowChange(e, window, action)
@@ -109,8 +105,6 @@ export const WindowManager = (props: Props) => {
   const mouseUpHandler = (e: React.MouseEvent) => {
     dispatch(setCanChangeWindow({ state: false }))
     dispatch(setWindowId({}))
-    if (currentWindow) dispatch(toggleCanAnimate({ windowId: currentWindow }))
-    setCurrentWindow("")
   }
 
   const mouseMoveHandler = (e: React.MouseEvent) => {

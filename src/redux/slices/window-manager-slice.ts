@@ -100,9 +100,13 @@ export const windowSlice = createSlice({
     closeWindow: (state, action: PayloadAction<CloseWindow>) => {
       if (state.windows[action.payload.id] === undefined) return state
       delete state.windows[action.payload.id]
+      for (let key in state.windows) {
+        state.windows[key].canAnimate = false
+      }
     },
     changeWindow: (state, action: PayloadAction<ChangeWindow>) => {
       if (state.windows[action.payload.id] === undefined) return state
+      state.windows[action.payload.id].canAnimate = false
       if (action.payload.pos)
         state.windows[action.payload.id].pos = action.payload.pos
       if (action.payload.size)
@@ -138,6 +142,7 @@ export const windowSlice = createSlice({
       if (state.viewState === ViewState.desktopview) {
         const { positions, scale } = arrangeWindows(state.windows)
         for (let key in state.windows) {
+          state.windows[key].canAnimate = true
           state.windows[key].lasState.pos = state.windows[key].pos
           state.windows[key].pos = positions[key]
           state.windows[key].scale = scale
