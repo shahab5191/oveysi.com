@@ -99,9 +99,7 @@ export const windowSlice = createSlice({
     },
     closeWindow: (state, action: PayloadAction<CloseWindow>) => {
       if (state.windows[action.payload.id] === undefined) return state
-      const temp = JSON.parse(JSON.stringify(state.windows))
-      delete temp[action.payload.id]
-      state.windows = { ...temp }
+      delete state.windows[action.payload.id]
     },
     changeWindow: (state, action: PayloadAction<ChangeWindow>) => {
       if (state.windows[action.payload.id] === undefined) return state
