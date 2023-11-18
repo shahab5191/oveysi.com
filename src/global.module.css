@@ -1,13 +1,14 @@
 :root {
   --font-family: "Cantarell";
 
-  --headerBar-bg: #303030;
+  --headerBar-bg: #242424;
   --headerBar-bg-unfocused: #242424;
   --headerBar-fg: #ffffff;
+  --headerBar-fg-unfocused: #999999;
   --headerBar-height: 25px;
   --headerBar-title-color: #ffffff;
   --headerBar-padding: 5px;
-  --headerBar-border-color: rgba(0, 0, 0, 0.36);
+  --headerBar-border-color: transparent;
   --headerBar-font-size: 10pt;
 
   --headerBar-button: #3e3e3e;
@@ -23,7 +24,7 @@
   --window-fg: #ffffff;
   --window-backdrop: #191919;
   --window-backdrop-radius: 10px;
-  --window-border-color: #303030;
+  --window-border-color: #404040;
 
   --view-bg: #1e1e1e;
 
@@ -68,6 +69,9 @@
   --icon-hover-bg-color: #545454;
   --icon-padding: 5px;
   --icon-border-radius: 15px;
+
+  --side-panel-bg-color: #303030;
+  --side-panel-bg-color-unfocused: #303030;
 }
 body {
   font-family: var(--font-family);

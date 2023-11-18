@@ -5,6 +5,7 @@ import { ReactNode } from "react"
 import settings from "../../settings/settings.json"
 import { ActionType, SettingsNewWindowPos } from "../../types/enums"
 import { arrangeWindows } from "../../utilities/arrange-windows"
+import { AppID } from "../../utilities/get-app-by-id"
 
 interface State {
   windows: Record<string, WindowProperties>
@@ -21,8 +22,7 @@ interface State {
 }
 interface OpenWindow {
   id: string
-  appId: string
-  title: string
+  appId: AppID
   pos?: Vec2
   size?: Vec2
   children: ReactNode
@@ -95,7 +95,7 @@ export const windowSlice = createSlice({
       state.windows[action.payload.id] = {
         id: action.payload.id,
         appId: action.payload.appId,
-        title: action.payload.title,
+        title: "",
         maximized: false,
         pos,
         size,
@@ -168,6 +168,12 @@ export const windowSlice = createSlice({
       state.windows[action.payload.windowId].canAnimate =
         !state.windows[action.payload.windowId].canAnimate
     },
+    setWindowTitle: (
+      state,
+      action: PayloadAction<{ id: string; title: string }>
+    ) => {
+      state.windows[action.payload.id].title = action.payload.title
+    },
   },
 })
 
@@ -197,6 +203,7 @@ export const {
   setWindowId,
   setViewState,
   toggleCanAnimate,
+  setWindowTitle
 } = windowSlice.actions
 
 export default windowSlice.reducer

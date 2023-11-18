@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
-import { Vec2 } from "../../types/types"
-import { Modal } from "../modals/modal"
+import { Vec2 } from "../../../types/types"
+import { Modal } from "../../ui/modals/modal"
 import styles from "./menu.module.css"
 import React from "react"
 interface Props {

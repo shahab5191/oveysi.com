@@ -1,12 +1,10 @@
 import { useState } from "react"
-import { Window } from "../../window/window"
 import styles from "./window-manager.module.css"
 import { ActionType, objectTypes, windowEdges } from "../../../types/enums"
 import { moveWindow, resizeWindow } from "./functions"
 import { Action, Vec2 } from "../../../types/types"
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks"
 import {
-  getFocusedWindow,
   getWindowAction,
   getWindows,
   setCanChangeWindow,
@@ -19,13 +17,13 @@ import {
   ViewState,
   getViewState,
 } from "../../../redux/slices/window-manager-slice"
+import { GetAppByID } from "../../../utilities/get-app-by-id"
 
 interface Props {}
 export const WindowManager = (props: Props) => {
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
   const { canChangWindow, action, windowId } = useAppSelector(getWindowAction)
   const windowsList = useAppSelector(getWindows)
-  const focusedWindow = useAppSelector(getFocusedWindow)
   const viewstate = useAppSelector(getViewState)
   const dispatch = useAppDispatch()
 
@@ -151,18 +149,13 @@ export const WindowManager = (props: Props) => {
       onMouseUp={mouseUpHandler}
       onMouseMove={mouseMoveHandler}
     >
-      {Object.keys(windowsList).map((key,i) => {
+      {Object.keys(windowsList).map((key, i) => {
         return (
-          <Window
-            pos={windowsList[key].pos}
-            size={windowsList[key].size}
-            isFocused={focusedWindow === windowsList[key].id}
-            id={windowsList[key].id}
-            title={windowsList[key].title}
+          <GetAppByID
+            appId={windowsList[key].appId}
+            windowId={windowsList[key].id}
             key={i}
-          >
-            {windowsList[key].children}
-          </Window>
+          />
         )
       })}
     </div>

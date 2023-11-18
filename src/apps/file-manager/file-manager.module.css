@@ -1,0 +1,7 @@
+
+.sidePanel{
+  color: white;
+}
+.sidePanel h3{
+  font-size: var(--headerBar-font-size);
+}

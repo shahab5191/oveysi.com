@@ -1,17 +1,17 @@
-import { ActionType, objectTypes } from "../../../types/enums"
+import { ActionType, objectTypes } from "../../../../types/enums"
 import { AiOutlineClose } from "react-icons/ai"
 import { MdMinimize } from "react-icons/md"
 import { VscChromeMaximize } from "react-icons/vsc"
 import styles from "./header-bar.module.css"
 import { useCallback, useState } from "react"
-import { Vec2 } from "../../../types/types"
+import { Vec2 } from "../../../../types/types"
 import { HeaderBarMenu } from "./header-bar-menu"
-import { useAppDispatch } from "../../../redux/hooks"
+import { useAppDispatch } from "../../../../redux/hooks"
 import {
   changeWindow,
   setFocusedWindow,
   setWindowAction,
-} from "../../../redux/slices/window-manager-slice"
+} from "../../../../redux/slices/window-manager-slice"
 
 type Props = {
   title: string

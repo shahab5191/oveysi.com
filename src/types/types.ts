@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { ActionType, windowEdges } from "./enums"
+import { AppID } from "../utilities/get-app-by-id"
 
 export interface Vec2 {
   x: number
@@ -7,7 +8,7 @@ export interface Vec2 {
 }
 export interface WindowProperties {
   id: string
-  appId: string
+  appId: AppID
   title: string
   pos: Vec2
   size: Vec2

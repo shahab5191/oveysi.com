@@ -1,0 +1,11 @@
+.sidePanel{
+  height: 100%;
+  width: 30%;
+  min-width: 150px;
+  max-width: 200px;
+  background-color: var(--side-panel-bg-color);
+  transition: background-color 0.2s ease-out;
+}
+.sidePanel.unfocused {
+  background-color: var(--side-panel-bg-color-unfocused);
+}

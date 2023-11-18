@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 import styles from "./menu-item.module.css"
-import { Vec2 } from "../../types/types"
+import { Vec2 } from "../../../types/types"
 
 interface Props {
   id: string

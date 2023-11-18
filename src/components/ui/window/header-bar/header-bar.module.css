@@ -1,4 +1,4 @@
-@import url('../../../global.module.css');
+@import url('../../../../global.module.css');
 .topBar{
   position: relative;
   background-color: var(--headerBar-bg-unfocused);
@@ -11,9 +11,13 @@
   border-top-right-radius: var(--window-radius);
   border-top-left-radius: var(--window-radius);
   display: flex;
+  color: var(--headerBar-fg-unfocused);
+  transition: color 0.2s ease-out;
+
 }
 .topBar.focused{
   background-color: var(--headerBar-bg);
+  color:var(--headerBar-fg)
 }
 
 .buttonsContainer{
@@ -31,7 +35,6 @@ h2.header{
   user-select: none;
   width: 100%;
   text-align: center;
-  color: var(--headerBar-fg);
   font-size: var(--headerBar-font-size)
 }
 

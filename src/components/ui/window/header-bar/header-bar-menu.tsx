@@ -1,9 +1,9 @@
-import { useAppSelector } from "../../../redux/hooks"
-import { getWindows } from "../../../redux/slices/window-manager-slice"
-import { Vec2 } from "../../../types/types"
-import { MenuModal } from "../../menu/menu"
-import { MenuListDivider } from "../../menu/menu-list-divider"
-import { MenuListItem } from "../../menu/menu-list-item"
+import { useAppSelector } from "../../../../redux/hooks"
+import { getWindows } from "../../../../redux/slices/window-manager-slice"
+import { Vec2 } from "../../../../types/types"
+import { MenuModal } from "../../../ui/menu/menu"
+import { MenuListDivider } from "../../../ui/menu/menu-list-divider"
+import { MenuListItem } from "../../../ui/menu/menu-list-item"
 
 interface Props {
   clickPos: Vec2

@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Vec2 } from "../../types/types"
+import { Vec2 } from "../../../types/types"
 import styles from "./modal.module.css"
 import { createPortal } from "react-dom"
 interface Props {

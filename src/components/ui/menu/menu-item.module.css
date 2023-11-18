@@ -1,4 +1,4 @@
-@import url("../../global.module.css");
+@import url("../../../global.module.css");
 .menuListItem {
   border-radius: var(--menu-list-item-border-radius);
   min-width: var(--menu-list-item-min-width);

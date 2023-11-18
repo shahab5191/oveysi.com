@@ -1,10 +1,11 @@
 .window {
   position: absolute;
   background-color: var(--window-bg);
-  border-top-right-radius: var(--window-radius);
-  border-top-left-radius: var(--window-radius);
+  border-radius: var(--window-radius);
   border: 1px solid var(--window-border-color);
   transform-origin: top left;
+  overflow: hidden;
+  display: flex;
 }
 
 .window.focused {
@@ -20,8 +21,13 @@
 
 }
 
+.headerChildWrapper{
+  width: 100%;
+}
+
 .childWrapper {
-  height: calc(100% - var(--headerBar-height));
+  position: relative;
+  height: calc(100% - var(--headerBar-height) - var(--headerBar-padding) * 2);
   z-index: 10;
 }
 
