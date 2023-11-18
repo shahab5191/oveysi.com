@@ -27,6 +27,16 @@ export const Docker = (props: Props) => {
     >
       <IconContext.Provider value={{ size: "50px" }}>
         <IconItem
+          icon={
+            <img
+              src="./org.gnome.TextEditor.svg"
+              height="100%"
+              width="auto"
+              alt="text-editor"
+            />
+          }
+        />
+        <IconItem
           icon={<PiDotsNineBold color="white" />}
           onClick={iconViewButtonHandler}
         />

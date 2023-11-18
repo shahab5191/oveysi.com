@@ -7,6 +7,7 @@ export interface Vec2 {
 }
 export interface WindowProperties {
   id: string
+  appId: string
   title: string
   pos: Vec2
   size: Vec2

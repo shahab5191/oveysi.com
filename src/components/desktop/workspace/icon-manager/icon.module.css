@@ -1,9 +1,13 @@
-.Icon{
+.Icon {
   transition: background-color 0.2s ease-out;
   padding: var(--icon-padding);
   border-radius: var(--icon-border-radius);
+  height: calc(100% - 10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.Icon:hover{
+.Icon:hover {
   background-color: var(--icon-hover-bg-color);
 }

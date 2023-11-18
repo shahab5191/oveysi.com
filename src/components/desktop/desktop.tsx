@@ -3,9 +3,7 @@ import { WindowManager } from "./window-manager/window-manager"
 import styles from "./desktop.module.css"
 import { ReactNode, useCallback, useEffect } from "react"
 import { useDispatch } from "react-redux"
-import {
-  openWindow,
-} from "../../redux/slices/window-manager-slice"
+import { openWindow } from "../../redux/slices/window-manager-slice"
 import { Vec2 } from "../../types/types"
 import { useAppSelector } from "../../redux/hooks"
 import {
@@ -16,9 +14,10 @@ import {
 import settings from "../../settings/settings.json"
 import { Workspace } from "./workspace/workspace"
 interface AddWindow {
+  appId: string
   title: string
   pos?: Vec2
-  size: Vec2
+  size?: Vec2
   id: string
   children?: ReactNode
 }
@@ -29,8 +28,8 @@ export const Desktop = (props: Props) => {
   const viewState = useAppSelector(getViewState)
 
   const addWindow = useCallback(
-    ({ title, pos, size, id, children }: AddWindow) => {
-      dispatch(openWindow({ id, pos, size, children, title }))
+    ({ appId, title, pos, size, id, children }: AddWindow) => {
+      dispatch(openWindow({ appId, id, pos, size, children, title }))
     },
     [dispatch]
   )
@@ -43,23 +42,26 @@ export const Desktop = (props: Props) => {
 
   useEffect(() => {
     addWindow({
+      appId: "1",
       title: "window 1",
-      size: { x: 300, y: 200 },
       id: "1234",
       children: "test\ntest",
     })
     addWindow({
+      appId: "2",
       title: "window 2",
       size: { x: 600, y: 400 },
       id: "2234",
     })
     addWindow({
+      appId: "1",
       title: "window 3",
       size: { x: 300, y: 200 },
       id: "1264",
       children: "test\ntest",
     })
     addWindow({
+      appId: "3",
       title: "window 4",
       size: { x: 600, y: 400 },
       id: "2274",

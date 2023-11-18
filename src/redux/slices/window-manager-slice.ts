@@ -21,6 +21,7 @@ interface State {
 }
 interface OpenWindow {
   id: string
+  appId: string
   title: string
   pos?: Vec2
   size?: Vec2
@@ -93,6 +94,7 @@ export const windowSlice = createSlice({
       state.lastPos = pos
       state.windows[action.payload.id] = {
         id: action.payload.id,
+        appId: action.payload.appId,
         title: action.payload.title,
         maximized: false,
         pos,

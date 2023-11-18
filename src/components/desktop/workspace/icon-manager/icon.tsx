@@ -1,6 +1,6 @@
 import { ReactNode, useCallback } from "react"
 import styles from "./icon.module.css"
-
+import settings from "../../../../settings/settings.json"
 interface Props {
   icon: ReactNode
   label?: string
@@ -15,7 +15,11 @@ export const IconItem = (props: Props) => {
   }, [props])
 
   return (
-    <div className={styles.Icon} onClick={clickHandler}>
+    <div
+      className={styles.Icon}
+      onClick={clickHandler}
+      style={{ width: settings.docker.dockerHeight - 10}}
+    >
       {props.icon}
       {props.label ? <p>{props.label}</p> : null}
     </div>
