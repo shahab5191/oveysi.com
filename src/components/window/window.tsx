@@ -12,11 +12,6 @@ import {
   toggleMaximize,
 } from "../../redux/slices/window-manager-slice"
 import { useDispatch } from "react-redux"
-import {
-  ViewState,
-  getViewState,
-} from "../../redux/slices/window-manager-slice"
-
 interface Props {
   pos: Vec2
   size: Vec2
@@ -28,7 +23,6 @@ interface Props {
 
 export const Window = (props: Props) => {
   const windows = useAppSelector(getWindows)
-  const viewstate = useAppSelector(getViewState)
   const dispatch = useDispatch()
 
   const maximizeButtonClicked = (e?: React.MouseEvent) => {
@@ -39,16 +33,11 @@ export const Window = (props: Props) => {
   const closeHandler = (e?: React.MouseEvent) => {
     dispatch(closeWindow({ id: props.id }))
   }
-  console.log(
-    windows[props.id].title,
-    windows[props.id].size.x,
-    windows[props.id].size.y
-  )
   return (
     <div
       className={`${styles.window} ${props.isFocused ? styles.focused : ""} ${
         windows[props.id].maximized ? styles.maximized : ""
-      } ${viewstate !== ViewState.desktopview ? styles.overview : ""} ${
+      } ${
         windows[props.id].canAnimate ? styles.canAnimate : ""
       }`}
       style={{

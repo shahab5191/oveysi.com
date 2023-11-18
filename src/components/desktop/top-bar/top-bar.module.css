@@ -9,6 +9,7 @@
   padding-left: var(--topBar-padding-x);
   padding-right: var(--topBar-padding-x);
   z-index: 999;
+  transition: background-color 0.2s ease-out;
 }
 .date {
   margin: 0;
@@ -33,4 +34,8 @@
 
 .topBarButton:hover {
   background-color: var(--topBar-button-hover-bg);
+}
+
+.topBar.overview{
+  background-color: var(--workspace-bg-color);
 }

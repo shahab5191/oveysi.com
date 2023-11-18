@@ -1,9 +1,11 @@
 import { TopBar } from "./top-bar/top-bar"
 import { WindowManager } from "./window-manager/window-manager"
 import styles from "./desktop.module.css"
-import { ReactNode, useCallback, useEffect, useMemo } from "react"
+import { ReactNode, useCallback, useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { openWindow } from "../../redux/slices/window-manager-slice"
+import {
+  openWindow,
+} from "../../redux/slices/window-manager-slice"
 import { Vec2 } from "../../types/types"
 import { useAppSelector } from "../../redux/hooks"
 import {
@@ -26,11 +28,10 @@ export const Desktop = (props: Props) => {
   const dispatch = useDispatch()
   const viewState = useAppSelector(getViewState)
 
-  const addWindow = useMemo(
-    () =>
-      ({ title, pos, size, id, children }: AddWindow) => {
-        dispatch(openWindow({ id, pos, size, children, title }))
-      },
+  const addWindow = useCallback(
+    ({ title, pos, size, id, children }: AddWindow) => {
+      dispatch(openWindow({ id, pos, size, children, title }))
+    },
     [dispatch]
   )
 
@@ -65,13 +66,18 @@ export const Desktop = (props: Props) => {
     })
   }, [addWindow])
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(setViewState(ViewState.overview))
+    }, 0)
+  }, [dispatch])
+
   return (
     <div
       className={`${styles.workspace} ${viewState ? styles.isOverview : ""}`}
     >
       <TopBar />
       <Workspace />
-
       <div
         id="desktop-window-manager"
         className={`${styles.desktop} ${

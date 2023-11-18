@@ -25,7 +25,10 @@ export const TopBar = (props: Props) => {
     }, 1000)
   }, [])
   return (
-    <div className={styles.topBar}>
+    <div
+      className={`${styles.topBar}
+        ${viewstate !== ViewState.desktopview ? styles.overview : ""}`}
+    >
       <button
         className={`${styles.activities} ${styles.topBarButton}`}
         onClick={activitiesClickHandler}

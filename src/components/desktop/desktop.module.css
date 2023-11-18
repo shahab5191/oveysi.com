@@ -18,20 +18,20 @@
   scale: 1;
   box-shadow: 0 0 var(--workspace-overview-shadow-spread)
     var(--workspace-overview-shadow-color);
-  transform-origin: top;
-  transition: scale 0.2s ease-out, border-radius 0.2s ease-out,
+  transform-origin: center;
+  transition: border-radius 0.2s ease-out,
     transform 0.2s ease-out, top 0.2s ease-out;
   overflow: hidden;
 }
 
 .desktop.overview {
-  top: calc(var(--topBar-height) + 10px);
-  scale: 0.75;
+  top: 50%;
+  transform: translateY(-50%) scale(0.75);
   border-radius: 15px;
 }
 
 .desktop.iconView {
-  top: calc(50px);
-  scale: 0.15;
+  top: 100px;
+  transform: translateY(-50%) scale(0.15);
   border-radius: 15px;
 }

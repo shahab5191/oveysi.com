@@ -3,6 +3,7 @@
   "wallpaper": "images/garud-linux-wallpaper.jpg",
   "newWindowPos": "cascade",
   "cascadeGap": 50,
+  "defaultWindowSize":{"x": 400, "y":300},
   "topBarHeight": 30,
   "viewState":{
     "iconViewScale": 0.15,

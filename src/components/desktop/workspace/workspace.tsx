@@ -3,7 +3,10 @@ import { IconManager } from "./icon-manager/icon-manager"
 import { Docker } from "./docker/docker"
 import { useEffect, useState } from "react"
 import { useAppSelector } from "../../../redux/hooks"
-import { ViewState, getViewState } from "../../../redux/slices/window-manager-slice"
+import {
+  ViewState,
+  getViewState,
+} from "../../../redux/slices/window-manager-slice"
 import settings from "../../../settings/settings.json"
 
 interface Props {}
@@ -26,9 +29,9 @@ export const Workspace = (props: Props) => {
       20
 
     let height =
-      window.innerHeight - icTop - (settings.docker.dockerHeight + 40)
+      window.innerHeight - icTop - (settings.docker.dockerHeight + 50)
 
-      setIconManagerTop(icTop)
+    setIconManagerTop(icTop)
     setIconManagerHeight(height)
   }, [viewstate])
 
@@ -38,7 +41,7 @@ export const Workspace = (props: Props) => {
         style={{
           top:
             viewstate === ViewState.iconview
-              ? iconManagerTop + 10 + "px"
+              ? iconManagerTop + 20 + "px"
               : window.innerHeight + "px",
           height: iconManagerHeight + "px",
         }}
