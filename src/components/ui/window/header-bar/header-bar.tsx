@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai"
 import { MdMinimize } from "react-icons/md"
 import { VscChromeMaximize } from "react-icons/vsc"
 import styles from "./header-bar.module.css"
-import { useCallback, useState } from "react"
+import { ReactNode, useCallback, useState } from "react"
 import { Vec2 } from "../../../../types/types"
 import { HeaderBarMenu } from "./header-bar-menu"
 import { useAppDispatch } from "../../../../redux/hooks"
@@ -19,6 +19,7 @@ type Props = {
   toggleMaximize: (e?: React.MouseEvent) => void
   closeHandler: (e?: React.MouseEvent) => void
   winId: string
+  children?: ReactNode
 }
 export const HeaderBar = (props: Props) => {
   const [showMenu, setShowMenu] = useState(false)
@@ -84,9 +85,13 @@ export const HeaderBar = (props: Props) => {
         onMouseDown={clickHandler}
         onDoubleClick={props.toggleMaximize}
       >
-        <h2 className={styles.header} object-type={objectTypes.TOP_BAR}>
-          {props.title}
-        </h2>
+        {props.children ? (
+          props.children
+        ) : (
+          <h2 className={styles.header} object-type={objectTypes.TOP_BAR}>
+            {props.title}
+          </h2>
+        )}
         <div className={styles.buttonsContainer}>
           <button
             className={`${styles.button} ${

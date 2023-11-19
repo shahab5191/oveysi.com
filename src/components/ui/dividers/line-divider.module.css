@@ -1,0 +1,7 @@
+.horizontal{
+  height: 1px;
+  width: calc(100% - var(--side-panel-padding));
+  background-color: var(--horizontal-divider-bg-color);
+  margin-top: var(--horizontal-divider-margin-y);
+  margin-bottom: var(--horizontal-divider-margin-y);
+}

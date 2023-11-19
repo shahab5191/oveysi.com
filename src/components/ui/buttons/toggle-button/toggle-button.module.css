@@ -1,0 +1,29 @@
+.toggleButton {
+  background-color: var(--toggle-button-bg-color);
+  color: var(--toggle-button-fg-color);
+  user-select: none;
+  transition: background-color 0.2s ease-out;
+  padding: var(--toggle-button-padding);
+  border-radius: var(--toggle-button-border-radius);
+  margin: var(--toggle-button-margin);
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.toggleButton:hover {
+  background-color: var(--toggle-button-hover-bg-color);
+}
+
+.toggleButton.active {
+  background-color: var(--toggle-button-active-bg-color);
+}
+.toggleButton.active:hover {
+  background-color: var(--toggle-button-active-hover-bg-color);
+}
+
+.toggleButton p {
+  margin: 0;
+  font-size: var(--toggle-button-font-size);
+}

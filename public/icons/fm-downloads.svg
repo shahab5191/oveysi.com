@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="4mm"
+   height="4mm"
+   viewBox="0 0 4 4"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="fm-downloads.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="16.22695"
+     inkscape:cx="0.86276226"
+     inkscape:cy="6.7480334"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="1360"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6362" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.26458642)">
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,-10.847969,-213.51875)"
+       id="g6362"
+       inkscape:label="document recent files folders documents">
+      <title
+         id="title96511">document-open-recent</title>
+      <path
+         id="rect190376-2"
+         d="m 49.559266,807.00001 c -0.52184,0 -0.944883,0.42304 -0.944883,0.94488 v 8.1127 L 46.447798,813.891 c -0.177165,-0.17721 -0.417477,-0.27677 -0.668059,-0.27681 -0.250584,4e-5 -0.490895,0.0996 -0.668061,0.27681 -0.3689,0.36899 -0.3689,0.96714 0,1.33613 l 3.779527,3.77952 c 0.369005,0.36886 0.967116,0.36886 1.33612,0 l 3.779528,-3.77952 c 0.3689,-0.36899 0.3689,-0.96714 0,-1.33613 -0.368986,-0.3689 -0.967135,-0.3689 -1.33612,0 l -2.166585,2.16659 v -8.1127 c 0,-0.52184 -0.423043,-0.94488 -0.944882,-0.94488 z m -5.669291,13.22835 v 1.88976 h 11.338581 v -1.88976 z"
+         style="fill:#c0c0c0;fill-opacity:1;stroke-width:1" />
+    </g>
+  </g>
+</svg>

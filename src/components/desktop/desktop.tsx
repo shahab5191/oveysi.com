@@ -20,6 +20,7 @@ interface AddWindow {
   size?: Vec2
   id: string
   children?: ReactNode
+  appInitialState: Record<string, any>
 }
 
 type Props = {}
@@ -28,16 +29,8 @@ export const Desktop = (props: Props) => {
   const viewState = useAppSelector(getViewState)
 
   const addWindow = useCallback(
-    ({
-      appId,
-      pos,
-      size,
-      id,
-      children,
-    }: AddWindow) => {
-      dispatch(
-        openWindow({ appId, id, pos, size, children })
-      )
+    ({ appId, pos, size, id, children, appInitialState }: AddWindow) => {
+      dispatch(openWindow({ appId, id, pos, size, children, appInitialState }))
     },
     [dispatch]
   )
@@ -51,10 +44,10 @@ export const Desktop = (props: Props) => {
   useEffect(() => {
     addWindow({
       appId: AppID.FileManager,
-      size: {x:600, y:400},
+      size: { x: 600, y: 400 },
       id: "1234",
+      appInitialState: { "0": {} },
     })
-
   }, [addWindow])
 
   useEffect(() => {

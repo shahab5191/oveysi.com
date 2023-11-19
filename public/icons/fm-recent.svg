@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="4mm"
+   height="4mm"
+   viewBox="0 0 4 4"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="fm-recent.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="16.22695"
+     inkscape:cx="0.89357519"
+     inkscape:cy="6.8096592"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="1360"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6362" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.26458642)">
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,-10.847969,-213.51875)"
+       id="g6362"
+       inkscape:label="document recent files folders documents">
+      <title
+         id="title96511">document-open-recent</title>
+      <path
+         id="path3869"
+         d="m 49.559265,807.07274 c -4.13029,0 -7.48633,3.35603 -7.48633,7.48633 0,4.13029 3.35604,7.48632 7.48633,7.48632 4.13029,0 7.48633,-3.35603 7.48633,-7.48632 0,-4.1303 -3.35604,-7.48633 -7.48633,-7.48633 z m 0,1.97265 c 3.04941,0 5.51367,2.46427 5.51367,5.51368 0,3.04941 -2.46426,5.51367 -5.51367,5.51367 -3.04941,0 -5.51367,-2.46426 -5.51367,-5.51367 0,-3.04941 2.46426,-5.51368 5.51367,-5.51368 z m 3.00976,2.00782 a 0.50005,0.50005 0 0 0 -0.10351,0.006 0.50005,0.50005 0 0 0 -0.25,0.15625 l -2.65625,2.65625 -1.65625,-1.65625 a 0.50005,0.50005 0 1 0 -0.6875,0.6875 l 2,2 a 0.50005,0.50005 0 0 0 0.6875,0 l 3,-3 a 0.50005,0.50005 0 0 0 -0.33399,-0.84961 z"
+         style="fill:#c0c0c0;fill-opacity:1" />
+    </g>
+  </g>
+</svg>

@@ -26,6 +26,7 @@ interface OpenWindow {
   pos?: Vec2
   size?: Vec2
   children: ReactNode
+  appInitialState: Record<string, any>
 }
 interface CloseWindow {
   id: string
@@ -39,6 +40,12 @@ export enum ViewState {
   desktopview,
   overview,
   iconview,
+}
+
+interface SetAppState {
+  id: string
+  state: string
+  value: any
 }
 
 export const windowSlice = createSlice({
@@ -104,6 +111,7 @@ export const windowSlice = createSlice({
         scale: 1,
         canAnimate: true,
         lastState: { pos, size },
+        appState: action.payload.appInitialState,
       }
     },
     closeWindow: (state, action: PayloadAction<CloseWindow>) => {
@@ -174,6 +182,10 @@ export const windowSlice = createSlice({
     ) => {
       state.windows[action.payload.id].title = action.payload.title
     },
+    setAppState: (state, action: PayloadAction<SetAppState>) => {
+      state.windows[action.payload.id].appState[action.payload.state] =
+        action.payload.value
+    },
   },
 })
 
@@ -192,6 +204,9 @@ export const isMaximized = (state: RootState) => {
 export const getViewState = (state: RootState) => {
   return state.windowReducer.viewState
 }
+export const getAppState = (state: RootState, id: string) => {
+  return state.windowReducer.windows[id].appState
+}
 export const {
   openWindow,
   closeWindow,
@@ -203,7 +218,8 @@ export const {
   setWindowId,
   setViewState,
   toggleCanAnimate,
-  setWindowTitle
+  setWindowTitle,
+  setAppState,
 } = windowSlice.actions
 
 export default windowSlice.reducer

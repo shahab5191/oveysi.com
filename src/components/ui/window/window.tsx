@@ -21,6 +21,7 @@ interface Props {
   id: string
   children?: ReactNode
   sidePanelChildren?: ReactNode
+  topBarChildren?: ReactNode
   title?: string
 }
 
@@ -55,7 +56,9 @@ export const Window = (props: Props) => {
       is-movable={windows[props.id].maximized ? 0 : 1}
     >
       {props.sidePanelChildren && windows[props.id].size.x > 400 ? (
-        <SidePanel>{props.sidePanelChildren}</SidePanel>
+        <SidePanel windowHasFocuse={props.id === focusedWindow}>
+          {props.sidePanelChildren}
+        </SidePanel>
       ) : null}
       <div className={styles.headerChildWrapper}>
         <HeaderBar
@@ -64,7 +67,9 @@ export const Window = (props: Props) => {
           toggleMaximize={maximizeButtonClicked}
           closeHandler={closeHandler}
           winId={props.id}
-        />
+        >
+          {props.topBarChildren}
+        </HeaderBar>
         <div className={styles.childWrapper} object-type="window-body">
           {props.children}
         </div>

@@ -1,7 +1,19 @@
-
-.sidePanel{
+.sidePanel {
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
-.sidePanel h3{
+.sidePanelTitle {
+  display: grid;
+  margin-bottom: var(--side-panel-padding);
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 2fr 1fr;
+  width: 100%;
+}
+.sidePanelTitle h3 {
   font-size: var(--headerBar-font-size);
+  margin: 0;
 }

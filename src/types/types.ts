@@ -18,6 +18,7 @@ export interface WindowProperties {
   scale: number
   canAnimate: boolean
   lastState: { pos: Vec2; size: Vec2 }
+  appState: Record<string, any>
 }
 
 export interface Action {

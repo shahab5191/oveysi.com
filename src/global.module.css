@@ -38,13 +38,13 @@
   --topBar-button-hover-bg: #303030;
   --topBar-button-padding: 5px 10px;
 
-  --menu-bg-color: #303030;
+  --menu-bg-color: #383838;
   --menu-fg-color: #ffffff;
   --menu-border-color: rgba(100%, 100%, 100%, 0.05);
   --menu-shadow-color: #272727;
   --menu-border-radius: 15px;
   --menu-padding: 5px;
-  --menu-list-item-hover-bg: #404040;
+  --menu-list-item-hover-bg: #484848;
   --menu-list-item-border-radius: 10px;
   --menu-list-item-min-width: 150px;
   --menu-list-item-height: 30px;
@@ -71,7 +71,21 @@
   --icon-border-radius: 15px;
 
   --side-panel-bg-color: #303030;
-  --side-panel-bg-color-unfocused: #303030;
+  --side-panel-bg-color-unfocused: #282828;
+  --side-panel-padding: 4px;
+
+  --toggle-button-bg-color: transparent;
+  --toggle-button-fg-color: white;
+  --toggle-button-hover-bg-color: #3f3f3f;
+  --toggle-button-active-bg-color: #444444;
+  --toggle-button-active-hover-bg-color: #4a4a4a;
+  --toggle-button-padding: 8px 16px;
+  --toggle-button-border-radius: 5px;
+  --toggle-button-margin: 1px;
+  --toggle-button-font-size: 11pt;
+
+  --horizontal-divider-bg-color: #545454;
+  --horizontal-divider-margin-y: 10px;
 }
 body {
   font-family: var(--font-family);

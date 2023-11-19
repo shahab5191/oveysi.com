@@ -5,6 +5,7 @@
   height: var(--menu-list-item-height);
   padding: var(--menu-list-item-padding);
   display: flex;
+  gap: 15px;
   align-items: center;
 }
 .menuListItem:hover {
@@ -16,9 +17,18 @@
   background-color: var(--menu-border-color);
   margin: var(--menu-divider-margin);
 }
-.menuListItem.disabled{
-  color:var(--menu-list-item-disabled-fg)
+.menuListItem.disabled {
+  color: var(--menu-list-item-disabled-fg);
 }
-.menuListItem.disabled:hover{
+.menuListItem.disabled:hover {
   background-color: transparent;
+}
+.shortcut {
+  float: right;
+  color: #999999;
+  text-align: right;
+}
+
+.label{
+  width: 100%;
 }
