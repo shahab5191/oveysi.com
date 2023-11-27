@@ -1,4 +1,5 @@
 import { windowEdges } from "../../../types/enums"
+import { Vec2 } from "../../../types/types"
 
 export const moveWindow = (
   windowObj: HTMLDivElement,
@@ -9,8 +10,14 @@ export const moveWindow = (
   const top = parseInt(windowObj.style.top)
   const width = parseInt(windowObj.style.width)
   const height = parseInt(windowObj.style.height)
-  let newLeft = Math.max(Math.min(left + movementX, window.innerWidth - 10), 10 - width)
-  let newTop = Math.max(Math.min(top + movementY, window.innerHeight - 10), 10 - height)
+  let newLeft = Math.max(
+    Math.min(left + movementX, window.innerWidth - 10),
+    10 - width
+  )
+  let newTop = Math.max(
+    Math.min(top + movementY, window.innerHeight - 10),
+    10 - height
+  )
   return {
     x: newLeft,
     y: newTop,
@@ -21,7 +28,8 @@ export const resizeWindow = (
   windowObj: HTMLDivElement,
   direction: windowEdges,
   deltaX: number,
-  deltaY: number
+  deltaY: number,
+  minSize: Vec2
 ) => {
   if (!windowObj) return { newPos: { x: 0, y: 0 }, newSize: { x: 0, y: 0 } }
   const width = parseInt(windowObj.style.width)
@@ -34,38 +42,50 @@ export const resizeWindow = (
     newHeight = height
   switch (direction) {
     case windowEdges.RIGHT:
-      newWidth = width + deltaX
+      newWidth = Math.max(width + deltaX, minSize.x)
       break
     case windowEdges.BOTTOM:
-      newHeight = height + deltaY
+      newHeight = Math.max(height + deltaY, minSize.y)
       break
     case windowEdges.LEFT:
-      newLeft = left + deltaX
-      newWidth = width - deltaX
+      if (width > minSize.x || deltaX < 0) {
+        newLeft = left + deltaX
+        newWidth = width - deltaX
+      }
       break
     case windowEdges.TOP:
-      newTop = top + deltaY
-      newHeight = height - deltaY
+      if (height > minSize.y || deltaY < 0) {
+        newTop = top + deltaY
+        newHeight = height - deltaY
+      }
       break
     case windowEdges.BOTTOM_RIGHT:
-      newWidth = width + deltaX
-      newHeight = height + deltaY
+      newWidth = Math.max(width + deltaX, minSize.x)
+      newHeight = Math.max(height + deltaY, minSize.y)
       break
     case windowEdges.BOTTOM_LEFT:
-      newWidth = width - deltaX
-      newHeight = height + deltaY
-      newLeft = left + deltaX
+      newHeight = Math.max(height + deltaY, minSize.y)
+      if (width > minSize.x || deltaX < 0) {
+        newWidth = width - deltaX
+        newLeft = left + deltaX
+      }
       break
     case windowEdges.TOP_RIGHT:
-      newWidth = width + deltaX
-      newTop = top + deltaY
-      newHeight = height - deltaY
+      newWidth = Math.max(width + deltaX, minSize.x)
+      if (height > minSize.y || deltaY < 0) {
+        newTop = top + deltaY
+        newHeight = height - deltaY
+      }
       break
     case windowEdges.TOP_LEFT:
-      newLeft = left + deltaX
-      newTop = top + deltaY
-      newHeight = height - deltaY
-      newWidth = width - deltaX
+      if (width > minSize.x || deltaX < 0) {
+        newLeft = left + deltaX
+        newWidth = width - deltaX
+      }
+      if (height > minSize.y || deltaY < 0) {
+        newTop = top + deltaY
+        newHeight = height - deltaY
+      }
       break
     default:
       break

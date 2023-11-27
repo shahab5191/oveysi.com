@@ -27,6 +27,7 @@ interface OpenWindow {
   size?: Vec2
   children: ReactNode
   appInitialState: Record<string, any>
+  minSize?: Vec2
 }
 interface CloseWindow {
   id: string
@@ -112,6 +113,9 @@ export const windowSlice = createSlice({
         canAnimate: true,
         lastState: { pos, size },
         appState: action.payload.appInitialState,
+        minSize: action.payload.minSize
+          ? action.payload.minSize
+          : { x: 200, y: 200 },
       }
     },
     closeWindow: (state, action: PayloadAction<CloseWindow>) => {
@@ -182,6 +186,12 @@ export const windowSlice = createSlice({
     ) => {
       state.windows[action.payload.id].title = action.payload.title
     },
+    setWindowMinSize: (
+      state,
+      action: PayloadAction<{ id: string; minSize: Vec2 }>
+    ) => {
+      state.windows[action.payload.id].minSize = action.payload.minSize
+    },
     setAppState: (state, action: PayloadAction<SetAppState>) => {
       state.windows[action.payload.id].appState[action.payload.state] =
         action.payload.value
@@ -219,6 +229,7 @@ export const {
   setViewState,
   toggleCanAnimate,
   setWindowTitle,
+  setWindowMinSize,
   setAppState,
 } = windowSlice.actions
 

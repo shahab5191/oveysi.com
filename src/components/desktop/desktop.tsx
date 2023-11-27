@@ -44,7 +44,7 @@ export const Desktop = (props: Props) => {
   useEffect(() => {
     addWindow({
       appId: AppID.FileManager,
-      size: { x: 600, y: 400 },
+      size: { x: 800, y: 500 },
       id: "1234",
       appInitialState: { "0": {} },
     })

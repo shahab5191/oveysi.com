@@ -1,5 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { checkForDuplicateFolders } from "../../utilities/check-for-duplicates"
+import {
+  indexOfFolder,
+  checkForDuplicateFolders,
+} from "../../utilities/file-system-utils"
+import { RootState } from "../store"
 enum FileType {
   IMAGE,
   SOUND,
@@ -19,37 +23,38 @@ export interface Folder {
   folders: Folder[]
 }
 interface State {
-  root: Folder
+  root: Folder[]
 }
 
 export const fileSystemSlice = createSlice({
   name: "folder",
   initialState: {
-    root: { name: "/", files: [], folders: [] },
+    root: [{ name: "/", files: [], folders: [] }],
   } as State,
   reducers: {
     createFolder: (
       state,
-      action: PayloadAction<{ address: Array<number>; name: string }>
+      action: PayloadAction<{ address: Array<string>; name: string }>
     ) => {
       let current = state.root
       for (let i = 0; i < action.payload.address.length; i++) {
-        if (current.folders.length <= action.payload.address[i]) {
-          return
-        }
-        current = current.folders[action.payload.address[i]]
+        const index = indexOfFolder(action.payload.address[i], current)
+        if (index === -1) return
+        current = current[index].folders
       }
-      if (checkForDuplicateFolders(current.folders, action.payload.name)) return
-      current.folders.push({
+      if (checkForDuplicateFolders(current, action.payload.name)) return
+      current.push({
         name: action.payload.name,
         files: [],
         folders: [],
       })
-      console.log(current.name)
     },
   },
 })
 
-export const { createFolder } = fileSystemSlice.actions
+export const getRoot = (state: RootState) => {
+  return state.fileSystemReducer.root
+}
 
+export const { createFolder } = fileSystemSlice.actions
 export default fileSystemSlice.reducer

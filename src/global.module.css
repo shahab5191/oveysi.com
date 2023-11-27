@@ -1,91 +1,108 @@
 :root {
+  --white: #fff;
+  --gray-0: #999999;
+  --gray-1: #595959;
+  --gray-2: #505050;
+  --gray-3: #404040;
+  --gray-4: #3e3e3e;
+  --gray-5: #383838;
+  --gray-6: #323232;
+  --gray-65: #2a2a2a;
+  --gray-7: #242424;
+  --gray-8: #1e1e1e;
+  --gray-9: #191919;
+  --black: #000;
+
   --font-family: "Cantarell";
 
-  --headerBar-bg: #242424;
-  --headerBar-bg-unfocused: #242424;
-  --headerBar-fg: #ffffff;
-  --headerBar-fg-unfocused: #999999;
-  --headerBar-height: 25px;
-  --headerBar-title-color: #ffffff;
+  --headerBar-bg: var(--gray-7);
+  --headerBar-bg-unfocused: var(--gray-7);
+  --headerBar-fg: var(--white);
+  --headerBar-fg-unfocused: var(--gray-0);
+  --headerBar-height: 35px;
+  --headerBar-title-color: var(--white);
   --headerBar-padding: 5px;
   --headerBar-border-color: transparent;
   --headerBar-font-size: 10pt;
 
   --headerBar-button: #3e3e3e;
-  --headerBar-button-unfocused: #303030;
-  --headerBar-button-hover: #505050;
-  --headerBar-button-hover-unfocused: #3e3e3e;
+  --headerBar-button-unfocused: var(--gray-6);
+  --headerBar-button-hover: var(--gray-2);
+  --headerBar-button-hover-unfocused: var(--gray-4);
   --headerBar-button-size: 24px;
   --headerBar-button-gap: 5px;
 
   --windowEdge-width: 10px;
   --window-radius: 10px;
-  --window-bg: #242424;
-  --window-fg: #ffffff;
-  --window-backdrop: #191919;
+  --window-bg: var(--gray-7);
+  --window-fg: var(--white);
+  --window-backdrop: var(--gray-9);
   --window-backdrop-radius: 10px;
-  --window-border-color: #404040;
+  --window-border-color: var(--gray-3);
 
-  --view-bg: #1e1e1e;
+  --view-bg: var(--gray-8);
 
-  --topBar-bg: #1e1e1e;
+  --topBar-bg: var(--gray-8);
   --topBar-height: 30px;
-  --topBar-fg: #ffffff;
+  --topBar-fg: var(--white);
   --topBar-button-font-size: 10pt;
   --topBar-button-font-weight: bold;
   --topBar-padding-x: 0px;
   --topBar-button-border-radius: 15px;
-  --topBar-button-hover-bg: #303030;
+  --topBar-button-hover-bg: var(--gray-6);
   --topBar-button-padding: 5px 10px;
 
-  --menu-bg-color: #383838;
-  --menu-fg-color: #ffffff;
+  --menu-bg-color: var(--gray-5);
+  --menu-fg-color: var(--white);
   --menu-border-color: rgba(100%, 100%, 100%, 0.05);
-  --menu-shadow-color: #272727;
+  --menu-shadow-color: var(--gray-7);
   --menu-border-radius: 15px;
   --menu-padding: 5px;
-  --menu-list-item-hover-bg: #484848;
+  --menu-list-item-hover-bg: var(--gray-2);
   --menu-list-item-border-radius: 10px;
   --menu-list-item-min-width: 150px;
   --menu-list-item-height: 30px;
   --menu-list-item-padding: 5px 20px;
-  --menu-list-item-disabled-fg: #595959;
+  --menu-list-item-disabled-fg: var(--gray-1);
   --menu-divider-margin: 5px 10px;
 
   --workspace-overview-shadow-spread: 20px;
-  --workspace-overview-shadow-color: #1e1e1e;
+  --workspace-overview-shadow-color: var(--gray-8);
 
-  --workspace-bg-color: #282828;
+  --workspace-bg-color: var(--gray-6);
 
   --docker-height: 100px;
   --docker-width: max-content;
   --docker-padding: 5px;
-  --docker-bg-color: #3d3d3d;
+  --docker-bg-color: var(--gray-4);
   --docker-border-radius: 15px;
 
   --icon-manager-width: 80%;
   --icon-manager-bg-color: red;
 
-  --icon-hover-bg-color: #545454;
+  --icon-hover-bg-color: var(--gray-1);
   --icon-padding: 5px;
   --icon-border-radius: 15px;
 
-  --side-panel-bg-color: #303030;
-  --side-panel-bg-color-unfocused: #282828;
+  --side-panel-bg-color: var(--gray-6);
+  --side-panel-bg-color-unfocused: var(--gray-65);
   --side-panel-padding: 4px;
 
   --toggle-button-bg-color: transparent;
   --toggle-button-fg-color: white;
-  --toggle-button-hover-bg-color: #3f3f3f;
-  --toggle-button-active-bg-color: #444444;
-  --toggle-button-active-hover-bg-color: #4a4a4a;
+  --toggle-button-hover-bg-color: var(--gray-4);
+  --toggle-button-active-bg-color: var(--gray-3);
+  --toggle-button-active-hover-bg-color: var(--gray-2);
   --toggle-button-padding: 8px 16px;
   --toggle-button-border-radius: 5px;
   --toggle-button-margin: 1px;
   --toggle-button-font-size: 11pt;
 
-  --horizontal-divider-bg-color: #545454;
+  --horizontal-divider-bg-color: var(--gray-1);
   --horizontal-divider-margin-y: 10px;
+
+  --address-bar-bg-color: var(--gray-6);
+  --address-bar-unfocused-bg-color: var(--gray-65);
 }
 body {
   font-family: var(--font-family);

@@ -24,3 +24,8 @@ export enum SettingsNewWindowPos {
   CASCADE = "cascade",
   CENTER = "center",
 }
+
+export enum FileView {
+  LIST,
+  GRID
+}

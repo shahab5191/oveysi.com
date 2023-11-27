@@ -17,11 +17,11 @@
 }
 
 .window.canAnimate {
-  transition: left 0.2s ease-out, top 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out, transform 0.2s ease-out;
-
+  transition: left 0.2s ease-out, top 0.2s ease-out, width 0.2s ease-out,
+    height 0.2s ease-out, transform 0.2s ease-out;
 }
 
-.headerChildWrapper{
+.headerChildWrapper {
   width: 100%;
 }
 

@@ -1,5 +1,5 @@
-@import url('../../../../global.module.css');
-.topBar{
+@import url("../../../../global.module.css");
+.topBar {
   position: relative;
   background-color: var(--headerBar-bg-unfocused);
   width: calc(100% - var(--headerBar-padding) * 2);
@@ -13,20 +13,21 @@
   display: flex;
   color: var(--headerBar-fg-unfocused);
   transition: color 0.2s ease-out;
-
 }
-.topBar.focused{
+.topBar.focused {
   background-color: var(--headerBar-bg);
-  color:var(--headerBar-fg)
+  color: var(--headerBar-fg);
 }
 
-.buttonsContainer{
+.buttonsContainer {
   display: flex;
   align-items: center;
   gap: var(--headerBar-button-gap);
+  padding-right: 5px;
+  min-width: max-content;
 }
 
-h2.header{
+h2.header {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -35,10 +36,10 @@ h2.header{
   user-select: none;
   width: 100%;
   text-align: center;
-  font-size: var(--headerBar-font-size)
+  font-size: var(--headerBar-font-size);
 }
 
-.button{
+.button {
   position: relative;
   display: flex;
   justify-content: center;
@@ -52,13 +53,12 @@ h2.header{
   border-radius: 50%;
   transition: background-color 0.3s ease-in-out;
 }
-.button.focused{
+.button.focused {
   background-color: var(--headerBar-button);
 }
-.button.focused:hover{
+.button.focused:hover {
   background-color: var(--headerBar-button-hover);
 }
-.button:hover{
+.button:hover {
   background-color: var(--headerBar-button-hover-unfocused);
 }
-

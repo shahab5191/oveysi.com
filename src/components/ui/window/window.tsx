@@ -55,7 +55,7 @@ export const Window = (props: Props) => {
       id={props.id}
       is-movable={windows[props.id].maximized ? 0 : 1}
     >
-      {props.sidePanelChildren && windows[props.id].size.x > 400 ? (
+      {props.sidePanelChildren && windows[props.id].size.x > 685 ? (
         <SidePanel windowHasFocuse={props.id === focusedWindow}>
           {props.sidePanelChildren}
         </SidePanel>

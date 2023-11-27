@@ -1,0 +1,13 @@
+.addressBarContainer {
+  display: flex;
+  min-width: 100px;
+  width: 100%;
+  background-color: var(--address-bar-unfocused-bg-color);
+  height: calc(var(--headerBar-height));
+  border-radius: 5px;
+  transition: background-color 0.2s ease-out;
+}
+
+.addressBarContainer.focused {
+  background-color: var(--address-bar-bg-color);
+}

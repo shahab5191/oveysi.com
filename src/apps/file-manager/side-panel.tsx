@@ -1,39 +1,28 @@
 import { useState } from "react"
 import { ToggleButton } from "../../components/ui/buttons/toggle-button/toggle-button"
 import { LineDivider } from "../../components/ui/dividers/line-divider"
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import {
-  getAppState,
-  setAppState,
-} from "../../redux/slices/window-manager-slice"
+
 import styles from "./file-manager.module.css"
 import { HambergurMenu } from "./hambergur-menu"
 import { Vec2 } from "../../types/types"
 interface Props {
   id: string
   tab: string
+  addressChange: (address: string[]) => void
+  currentAddress: string[]
 }
 export const FileManagerSidePanel = (props: Props) => {
-  const dispatch = useAppDispatch()
-  const appState = useAppSelector((state) => getAppState(state, props.id))
   const [hambergurActive, setHambergurActive] = useState(false)
   const [hambergurPos, setHambergurPos] = useState<Vec2>({ x: 0, y: 0 })
 
   const hamburgerMenuClosedHandler = () => {
     setHambergurActive(false)
   }
-  const itemClickHandler = (address: string) => {
-    dispatch(
-      setAppState({
-        id: props.id,
-        state: props.tab,
-        value: { "current-address": address },
-      })
-    )
-    return
+  const itemClickHandler = (address: string | string[]) => {
+    if (typeof address === "object") props.addressChange(address)
   }
   const hamburgerClickHandler = (
-    id: string,
+    data: string | string[],
     e?: React.MouseEvent<HTMLDivElement>
   ) => {
     if (e && e.currentTarget) {
@@ -46,12 +35,15 @@ export const FileManagerSidePanel = (props: Props) => {
   const hambergurItemClickHandler = (id: string) => {
     console.log(id)
   }
+
   return (
     <>
-      <div className={styles.sidePanel}>
-        <div className={styles.sidePanelTitle}>
+      <div className={styles.sidePanel} object-type="side-panel">
+        <div className={styles.sidePanelTitle} object-type="side-panel">
           <div></div>
-          <h3>Files</h3>
+          <h3 style={{ userSelect: "none" }} object-type="app-title">
+            Files
+          </h3>
           <ToggleButton
             id="hamburger-menu"
             icon={<img src="./icons/fm-hamburger.svg" alt="hambergur menu" />}
@@ -63,123 +55,133 @@ export const FileManagerSidePanel = (props: Props) => {
             }}
           />
         </div>
-        <ToggleButton
-          label="Recent"
-          icon={
-            <img
-              src="./icons/fm-recent.svg"
-              alt="recent icon"
-              width="15px"
-            ></img>
-          }
-          id="recent"
-          onClick={itemClickHandler}
-          active={
-            appState[props.tab].hasOwnProperty("current-address") &&
-            appState[props.tab]["current-address"] === "recent"
-          }
-        />
-        <ToggleButton
-          label="Home"
-          icon={
-            <img src="./icons/fm-home.svg" alt="home icon" width="15px"></img>
-          }
-          id="/home"
-          onClick={itemClickHandler}
-          active={
-            JSON.stringify(appState[props.tab]) ===
-            JSON.stringify({ "current-address": "/home" })
-          }
-        />
-        <ToggleButton
-          label="Documents"
-          icon={
-            <img
-              src="./icons/fm-documents.svg"
-              alt="documents icon"
-              width="15px"
-            ></img>
-          }
-          id="/home/documents"
-          onClick={itemClickHandler}
-          active={
-            JSON.stringify(appState[props.tab]) ===
-            JSON.stringify({ "current-address": "/home/documents" })
-          }
-        />
-        <ToggleButton
-          label="Music"
-          icon={
-            <img src="./icons/fm-music.svg" alt="music icon" width="15px"></img>
-          }
-          id="/home/music"
-          onClick={itemClickHandler}
-          active={
-            JSON.stringify(appState[props.tab]) ===
-            JSON.stringify({ "current-address": "/home/music" })
-          }
-        />
-        <ToggleButton
-          label="Pictures"
-          icon={
-            <img
-              src="./icons/fm-pictures.svg"
-              alt="home icon"
-              width="15px"
-            ></img>
-          }
-          id="/home/pictures"
-          onClick={itemClickHandler}
-          active={
-            JSON.stringify(appState[props.tab]) ===
-            JSON.stringify({ "current-address": "/home/pictures" })
-          }
-        />
-        <ToggleButton
-          label="Videos"
-          icon={
-            <img
-              src="./icons/fm-videos.svg"
-              alt="videos icon"
-              width="15px"
-            ></img>
-          }
-          id="/home/videos"
-          onClick={itemClickHandler}
-          active={
-            JSON.stringify(appState[props.tab]) ===
-            JSON.stringify({ "current-address": "/home/videos" })
-          }
-        />
-        <ToggleButton
-          label="Trash"
-          icon={
-            <img src="./icons/fm-trash.svg" alt="trash icon" width="15px"></img>
-          }
-          id="/trash"
-          onClick={itemClickHandler}
-          active={
-            JSON.stringify(appState[props.tab]) ===
-            JSON.stringify({ "current-address": "/trash" })
-          }
-        />
-        <LineDivider horizontal={true} />
-        <ToggleButton
-          label="Other Locations"
-          icon={
-            <img
-              src="./icons/fm-plus.svg"
-              alt="other-locations icon"
-              width="15px"
-            ></img>
-          }
-          id="other-locations"
-          onClick={itemClickHandler}
-          active={
-            JSON.stringify(appState[props.tab]) ===
-            JSON.stringify({ "current-address": "other-locations" })
-          }
-        />
+        <div className={styles.sidePanelButtons}>
+          <ToggleButton
+            label="Recent"
+            icon={
+              <img
+                src="./icons/fm-recent.svg"
+                alt="recent icon"
+                width="15px"
+              ></img>
+            }
+            data={["/", "Recent"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "Recent"])
+            }
+          />
+          <ToggleButton
+            label="Home"
+            icon={
+              <img src="./icons/fm-home.svg" alt="home icon" width="15px"></img>
+            }
+            data={["/", "home", "shahab"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "home", "shahab"])
+            }
+          />
+          <ToggleButton
+            label="Documents"
+            icon={
+              <img
+                src="./icons/fm-documents.svg"
+                alt="documents icon"
+                width="15px"
+              ></img>
+            }
+            data={["/", "home", "shahab", "Documents"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "home", "shahab", "Documents"])
+            }
+          />
+          <ToggleButton
+            label="Music"
+            icon={
+              <img
+                src="./icons/fm-music.svg"
+                alt="music icon"
+                width="15px"
+              ></img>
+            }
+            data={["/", "home", "shahab", "Music"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "home", "shahab", "Music"])
+            }
+          />
+          <ToggleButton
+            label="Pictures"
+            icon={
+              <img
+                src="./icons/fm-pictures.svg"
+                alt="home icon"
+                width="15px"
+              ></img>
+            }
+            data={["/", "home", "shahab", "Pictures"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "home", "shahab", "Pictures"])
+            }
+          />
+          <ToggleButton
+            label="Videos"
+            icon={
+              <img
+                src="./icons/fm-videos.svg"
+                alt="videos icon"
+                width="15px"
+              ></img>
+            }
+            data={["/", "home", "shahab", "Videos"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "home", "shahab", "Videos"])
+            }
+          />
+          <ToggleButton
+            label="Trash"
+            icon={
+              <img
+                src="./icons/fm-trash.svg"
+                alt="trash icon"
+                width="15px"
+              ></img>
+            }
+            data={["/", "Trash"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "Trash"])
+            }
+          />
+          <LineDivider horizontal={true} />
+          <ToggleButton
+            label="Other Locations"
+            icon={
+              <img
+                src="./icons/fm-plus.svg"
+                alt="other-locations icon"
+                width="15px"
+              ></img>
+            }
+            data={["/", "other-locations"]}
+            onClick={itemClickHandler}
+            active={
+              JSON.stringify(props.currentAddress) ===
+              JSON.stringify(["/", "other-locations"])
+            }
+          />
+        </div>
       </div>
       {hambergurActive ? (
         <HambergurMenu

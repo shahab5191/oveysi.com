@@ -1,6 +1,14 @@
-.horizontal{
+.horizontal {
   height: 1px;
   width: calc(100% - var(--side-panel-padding));
+  background-color: var(--horizontal-divider-bg-color);
+  margin-top: var(--horizontal-divider-margin-y);
+  margin-bottom: var(--horizontal-divider-margin-y);
+}
+
+.vertical {
+  width: 2px;
+  height: calc(100% - 5px);
   background-color: var(--horizontal-divider-bg-color);
   margin-top: var(--horizontal-divider-margin-y);
   margin-bottom: var(--horizontal-divider-margin-y);

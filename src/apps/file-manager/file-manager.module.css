@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: calc(100% - var(--side-panel-padding) - 5px);
 }
 .sidePanelTitle {
   display: grid;
@@ -16,4 +17,9 @@
 .sidePanelTitle h3 {
   font-size: var(--headerBar-font-size);
   margin: 0;
+}
+
+.sidePanelButtons {
+  overflow-y: auto;
+  overflow-x: hidden;
 }

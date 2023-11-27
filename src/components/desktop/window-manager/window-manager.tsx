@@ -129,7 +129,8 @@ export const WindowManager = (props: Props) => {
             windowDom,
             action.option?.direction,
             deltaX,
-            deltaY
+            deltaY,
+            windowsList[windowId].minSize
           )
           setLastMousePos({ x: e.pageX, y: e.pageY })
           if (windowId) {
