@@ -2,7 +2,7 @@ import { AddressBar } from "./address-bar"
 import styles from "./top-bar.module.css"
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 import { IoSearchSharp, IoGrid } from "react-icons/io5"
-import { ImList } from "react-icons/im";
+import { ImList } from "react-icons/im"
 import { FaCaretDown } from "react-icons/fa"
 import { FileView } from "../../types/enums"
 import { ToggleButton } from "../../components/ui/buttons/toggle-button/toggle-button"
@@ -13,6 +13,7 @@ interface Props {
   windowId: string
   tab: number
   view: FileView[]
+  address: string[]
   fileViewChange: (view: FileView) => void
 }
 export const FileManagerTopBar = (props: Props) => {
@@ -54,7 +55,7 @@ export const FileManagerTopBar = (props: Props) => {
           onClick={searchButtonClicked}
         />
       </div>
-      <AddressBar windowId={props.windowId} />
+      <AddressBar windowId={props.windowId} address={props.address} />
       <ToggleButton
         icon={<IoSearchSharp />}
         canMoveParent={true}

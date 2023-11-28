@@ -8,7 +8,9 @@ import { Vec2 } from "../../types/types"
 interface Props {
   id: string
   tab: string
+  currentZoom: number
   addressChange: (address: string[]) => void
+  zoomChanged: (change: number) => void
   currentAddress: string[]
 }
 export const FileManagerSidePanel = (props: Props) => {
@@ -188,6 +190,8 @@ export const FileManagerSidePanel = (props: Props) => {
           onClose={hamburgerMenuClosedHandler}
           onItemClick={hambergurItemClickHandler}
           pos={hambergurPos}
+          zoomClicked={props.zoomChanged}
+          currentZoom={props.currentZoom}
         />
       ) : null}
     </>

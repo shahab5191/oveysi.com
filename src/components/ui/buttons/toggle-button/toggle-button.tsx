@@ -8,6 +8,7 @@ interface Props {
   styles?: React.CSSProperties
   data?: any
   canMoveParent?: boolean
+  disable?: boolean
   onClick?: (data: any, e: React.MouseEvent<HTMLDivElement>) => void
 }
 export const ToggleButton = (props: Props) => {
@@ -22,7 +23,7 @@ export const ToggleButton = (props: Props) => {
     <div
       className={`${styles.toggleButton} ${props.active ? styles.active : ""} ${
         !props.label ? styles.center : ""
-      }`}
+      } ${props.disable ? styles.disable : ""}`}
       onClick={toggleActive}
       style={props.styles}
       object-type={props.canMoveParent ? "window-topbar" : ""}

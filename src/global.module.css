@@ -89,7 +89,7 @@
   --side-panel-padding: 4px;
 
   --toggle-button-bg-color: transparent;
-  --toggle-button-fg-color: white;
+  --toggle-button-fg-color: var(--white);
   --toggle-button-hover-bg-color: var(--gray-4);
   --toggle-button-active-bg-color: var(--gray-3);
   --toggle-button-active-hover-bg-color: var(--gray-2);
@@ -97,12 +97,18 @@
   --toggle-button-border-radius: 5px;
   --toggle-button-margin: 1px;
   --toggle-button-font-size: 11pt;
+  --toggle-button-disable-fg-color: var(--gray-2);
 
   --horizontal-divider-bg-color: var(--gray-1);
   --horizontal-divider-margin-y: 10px;
 
   --address-bar-bg-color: var(--gray-6);
   --address-bar-unfocused-bg-color: var(--gray-65);
+
+  --file-view-hover-bg-color: var(--gray-65);
+  --file-view-fg-color: var(--white);
+  --file-view-border-radius: 10px;
+  --file-view-laberl-margin: 10px;
 }
 body {
   font-family: var(--font-family);

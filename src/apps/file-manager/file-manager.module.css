@@ -22,4 +22,5 @@
 .sidePanelButtons {
   overflow-y: auto;
   overflow-x: hidden;
+  width: 100%;
 }

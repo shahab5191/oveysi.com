@@ -22,7 +22,12 @@
 .toggleButton.active:hover {
   background-color: var(--toggle-button-active-hover-bg-color);
 }
-
+.toggleButton.disable:hover{
+  background-color: transparent;
+}
+.toggleButton.disable{
+  color:var(--toggle-button-disable-fg-color);
+}
 .toggleButton p {
   margin: 0;
   font-size: var(--toggle-button-font-size);

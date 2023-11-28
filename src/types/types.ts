@@ -28,3 +28,22 @@ export interface Action {
     direction: windowEdges
   }
 }
+
+export enum FileType {
+  IMAGE,
+  SOUND,
+  VIDEO,
+  TEXT,
+  PDF,
+}
+export interface File {
+  name: string
+  icon: string
+  type: FileType
+}
+export interface FolderStruct {
+  name?: string
+  files?: File[]
+  subFolders: string[]
+  address: string[]
+}

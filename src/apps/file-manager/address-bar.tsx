@@ -1,9 +1,10 @@
-import { useAppSelector } from '../../redux/hooks'
-import { getFocusedWindow } from '../../redux/slices/window-manager-slice'
-import styles from './address-bar.module.css'
+import { useAppSelector } from "../../redux/hooks"
+import { getFocusedWindow } from "../../redux/slices/window-manager-slice"
+import styles from "./address-bar.module.css"
 
 interface Props {
   windowId: string
+  address: string[]
 }
 export const AddressBar = (props: Props) => {
   const focusedWindow = useAppSelector(getFocusedWindow)
@@ -13,6 +14,10 @@ export const AddressBar = (props: Props) => {
       className={`${styles.addressBarContainer} ${
         focusedWindow === props.windowId ? styles.focused : ""
       }`}
-    ></div>
+    >
+      {props.address.map((item, i) => (
+        <div key={i}>{item}</div>
+      ))}
+    </div>
   )
 }

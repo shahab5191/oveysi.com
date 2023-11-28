@@ -3,11 +3,15 @@ import { MenuModal } from "../../components/ui/menu/menu"
 import { Vec2 } from "../../types/types"
 import { MenuListItem } from "../../components/ui/menu/menu-list-item"
 import { LineDivider } from "../../components/ui/dividers/line-divider"
+import { ToggleButton } from "../../components/ui/buttons/toggle-button/toggle-button"
+import { BiSolidMinusSquare, BiSolidPlusSquare } from "react-icons/bi"
 
 interface Props {
   onClose: () => void
   pos: Vec2
+  currentZoom: number
   onItemClick: (id: string) => void
+  zoomClicked: (change: number) => void
 }
 export const HambergurMenu = (props: Props) => {
   const clickHandler = useCallback(() => {
@@ -36,17 +40,25 @@ export const HambergurMenu = (props: Props) => {
           display: "grid",
           gridTemplateColumns: "2fr 1fr",
           padding: "5px 5px 5px 15px",
-          alignItems:"center"
+          alignItems: "center",
         }}
       >
         <p style={{ margin: 0, textAlign: "left" }}>Icon Size</p>
         <div style={{ display: "flex" }}>
-          <div style={{padding:"5px"}}>
-            <img src="./icons/fm-zoom-back.svg" alt="zoom out icon" />
-          </div>
-          <div style={{padding:"5px"}}>
-            <img src="./icons/fm-zoom-in.svg" alt="zoom in icon" />
-          </div>
+          <ToggleButton
+            icon={<BiSolidMinusSquare />}
+            data={-1}
+            styles={{ padding: "7px", width: "max-content" }}
+            onClick={props.zoomClicked}
+            disable={props.currentZoom <= 1}
+          />
+          <ToggleButton
+            icon={<BiSolidPlusSquare />}
+            styles={{ padding: "7px", width: "max-content" }}
+            data={1}
+            onClick={props.zoomClicked}
+            disable={props.currentZoom >= 5}
+          />
         </div>
       </div>
       <LineDivider horizontal={true} margin={5} />

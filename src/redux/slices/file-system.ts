@@ -4,19 +4,8 @@ import {
   checkForDuplicateFolders,
 } from "../../utilities/file-system-utils"
 import { RootState } from "../store"
-enum FileType {
-  IMAGE,
-  SOUND,
-  VIDEO,
-  TEXT,
-  PDF,
-}
+import { File } from "../../types/types"
 
-interface File {
-  name: string
-  icon: string
-  type: FileType
-}
 export interface Folder {
   name: string
   files: File[]

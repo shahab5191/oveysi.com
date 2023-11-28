@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--file-view-border-radius);
+  color: var(--file-view-fg-color);
+  user-select: none;
+  transition: background-color 0.2s ease-out;
+}
+.container:hover {
+  background-color: var(--file-view-hover-bg-color);
+}
+.container p {
+  color: var(--file-view-fg-color);
+  margin: 0;
+  margin-top: var(--file-view-laberl-margin);
+  font-size: 11pt;
+}

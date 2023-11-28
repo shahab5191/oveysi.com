@@ -1,0 +1,38 @@
+.scrollWrapper {
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  position: relative;
+}
+.container.grid {
+  display: grid;
+  gap: 4px;
+  padding: 20px;
+  align-items: center;
+  justify-items: left;
+}
+.container.grid.zoom5 {
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+.container.grid.zoom4 {
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+.container.grid.zoom3 {
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+}
+.container.grid.zoom2 {
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+}
+.container.grid.zoom2 {
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+}
+.container.grid.zoom1 {
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+}
+
+.itemWrapper{
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}

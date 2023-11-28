@@ -39,6 +39,5 @@ export const getFolder = (rootFolder: Folder[], address: string[]) => {
     subFolders,
     address,
   }
-  console.log(result)
   return result
 }
